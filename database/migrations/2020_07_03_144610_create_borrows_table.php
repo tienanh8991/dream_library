@@ -15,6 +15,11 @@ class CreateBorrowsTable extends Migration
     {
         Schema::create('borrows', function (Blueprint $table) {
             $table->id();
+            $table->string('coupon_name');
+            $table->unsignedBigInteger('customer_id');
+            $table->foreign('customer_id')->references('id')->on('customers');
+            $table->date('borrow_date');
+            $table->date('expected_date');
             $table->timestamps();
         });
     }

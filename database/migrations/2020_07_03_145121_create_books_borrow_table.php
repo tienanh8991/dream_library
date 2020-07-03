@@ -15,6 +15,10 @@ class CreateBooksBorrowTable extends Migration
     {
         Schema::create('books_borrow', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('book_id');
+            $table->foreign('book_id')->references('id')->on('books');
+            $table->unsignedBigInteger('borrow_id');
+            $table->foreign('borrow_id')->references('id')->on('borrows');
             $table->timestamps();
         });
     }

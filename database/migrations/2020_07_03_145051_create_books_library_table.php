@@ -15,6 +15,10 @@ class CreateBooksLibraryTable extends Migration
     {
         Schema::create('books_library', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('book_id');
+            $table->foreign('book_id')->references('id')->on('books');
+            $table->unsignedBigInteger('library_id');
+            $table->foreign('library_id')->references('id')->on('libraries');
             $table->timestamps();
         });
     }
