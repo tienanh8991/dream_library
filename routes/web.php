@@ -21,6 +21,10 @@ Route::prefix('/')->group(function () {
     Route::get('dashboard','UserController@index')->name('dashboard');
     Route::prefix('user')->group(function () {
         Route::get('list','UserController@getAll')->name('user.list');
+        Route::get('create','UserController@create')->name('user.create');
+        Route::post('store','UserController@store')->name('user.store');
+        Route::get('destroy{id}','UserController@destroy')->name('user.delete');
+        Route::get('restore{id}','UserController@restoreUser')->name('user.restore');
     });
 });
 

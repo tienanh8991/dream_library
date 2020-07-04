@@ -48,7 +48,7 @@
                             Create
                         </a>
                     @else
-                        <a class="btn btn-success " href="#">
+                        <a class="btn btn-success " href="{{route('user.create')}}">
                             <i class="fas fa-pencil-alt">
                             </i>
                             Create
@@ -75,8 +75,10 @@
                             <th style="width: 8%" class="text-center">
                                 Role
                             </th>
+                            @if(auth()->user()->role === \App\Http\Role::ADMIN)
                             <th style="width: 20%">
                             </th>
+                            @endif
                         </tr>
                         </thead>
                         <tbody>
@@ -108,38 +110,48 @@
                                     </a>
                                 </td>
                                 <td class="project-state">
-                                    @if(auth()->user()->role == \App\Http\Role::ADMIN)
-                                        <span class="badge badge-success">Admin</span>
+                                    @if($user->role === \App\Http\Role::ADMIN)
+                                        <span class="badge badge-primary">Admin</span>
+                                    @elseif($user->role === \App\Http\Role::LIBRARIAN)
+                                        <span class="badge badge-success">Librarian</span>
                                     @else
-                                        <span class="badge badge-secondary">Librarian</span>
+                                        <span class="badge badge-secondary">Hide</span>
                                     @endif
                                 </td>
-                                @if(auth()->user()->role !== \App\Http\Role::ADMIN)
-                                    <td class="project-actions text-right">
-                                        <a class="btn btn-info btn-sm" href="#" hidden>
-                                            <i class="fas fa-pencil-alt">
-                                            </i>
-                                            Edit
-                                        </a>
-                                        <a class="btn btn-danger btn-sm" href="#" hidden>
-                                            <i class="fas fa-trash">
-                                            </i>
-                                            Delete
-                                        </a>
-                                    </td>
-                                @else
-                                    <td class="project-actions text-right">
-                                        <a class="btn btn-info btn-sm" href="#">
-                                            <i class="fas fa-pencil-alt">
-                                            </i>
-                                            Edit
-                                        </a>
-                                        <a class="btn btn-danger btn-sm" href="#">
-                                            <i class="fas fa-trash">
-                                            </i>
-                                            Delete
-                                        </a>
-                                    </td>
+                                @if(auth()->user()->role === \App\Http\Role::ADMIN)
+                                    @if($user->role === \App\Http\Role::ADMIN)
+                                        <td class="project-actions text-right">
+                                            <a class="btn btn-info btn-sm" href="#">
+                                                <i class="fas fa-pencil-alt">
+                                                </i>
+                                                Edit
+                                            </a>
+                                        </td>
+                                    @endif
+                                    @if($user->role === \App\Http\Role::LIBRARIAN)
+                                        <td class="project-actions text-right">
+                                            <a class="btn btn-info btn-sm" href="#">
+                                                <i class="fas fa-pencil-alt">
+                                                </i>
+                                                Edit
+                                            </a>
+                                            <a class="btn btn-danger btn-sm" href="{{route('user.delete',$user->id)}}">
+                                                <i class="fas fa-trash">
+                                                </i>
+                                                Delete
+                                            </a>
+                                        </td>
+                                    @endif
+                                    @if($user->role === \App\Http\Role::HIDE)
+                                        <td class="project-actions text-right">
+                                            <a class="btn btn-success btn-sm"
+                                               href="{{route('user.restore',$user->id)}}">
+                                                <i class="fas fa-reply">
+                                                </i>
+                                                Restore
+                                            </a>
+                                        </td>
+                                    @endif
                                 @endif
                             </tr>
                         @endforeach
