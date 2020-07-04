@@ -121,7 +121,7 @@
                                 @if(auth()->user()->role === \App\Http\Role::ADMIN)
                                     @if($user->role === \App\Http\Role::ADMIN)
                                         <td class="project-actions text-right">
-                                            <a class="btn btn-info btn-sm" href="#">
+                                            <a class="btn btn-info btn-sm" href="{{route('user.edit',$user->id)}}">
                                                 <i class="fas fa-pencil-alt">
                                                 </i>
                                                 Edit
@@ -130,7 +130,7 @@
                                     @endif
                                     @if($user->role === \App\Http\Role::LIBRARIAN)
                                         <td class="project-actions text-right">
-                                            <a class="btn btn-info btn-sm" href="#">
+                                            <a class="btn btn-info btn-sm" href="{{route('user.edit',$user->id)}}">
                                                 <i class="fas fa-pencil-alt">
                                                 </i>
                                                 Edit

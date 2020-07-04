@@ -1,6 +1,6 @@
 @extends('master')
 @section('master.title')
-    Library | Add new user
+    Library | Edit user
 @endsection
 
 @section('master.content')
@@ -12,12 +12,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1> Add New User</h1>
+                        <h1> Edit User</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Add User</li>
+                            <li class="breadcrumb-item active">Edit User</li>
                         </ol>
                     </div>
                 </div>
@@ -25,8 +25,8 @@
         </section>
 
         <!-- Main content -->
-<div class="container ">
-            <form action="{{route('user.store')}}" method="post" enctype="multipart/form-data">
+        <div class="container ">
+            <form action="{{route('user.update',$user->id)}}" method="post" enctype="multipart/form-data">
                 @csrf
                 <section class="content">
                     <div class="row">
@@ -44,34 +44,50 @@
                                 <div class="card-body">
                                     <div class="form-group">
                                         <label for="inputName">Name</label>
-                                        <input type="text" id="inputName" class="form-control" name="name">
+                                        <input type="text" id="inputName" class="form-control" name="name" value="{{$user->name}}">
                                     </div>
                                     <div class="form-group">
                                         <label for="inputEmail">Email</label>
-                                        <input type="email" id="inputEmail" class="form-control" name="email">
+                                        <input type="email" id="inputEmail" class="form-control" name="email" value="{{$user->email}}">
                                     </div>
                                     <div class="form-group">
                                         <label for="inputPassword">Password</label>
-                                        <input type="password" id="inputPassword" class="form-control" name="password">
+                                        <input type="password" id="inputPassword" class="form-control" name="password" disabled value="{{$user->password}}">
                                     </div>
                                     <div class="form-group">
-                                        <label for="inputConfirmPassword">Confirm Password</label>
-                                        <input type="password" id="inputConfirmPassword" class="form-control" name="confirmPassword">
+                                        <label for="inputStatus">Role</label>
+                                        <select class="form-control custom-select" name="role">
+                                            <option
+                                                @if($user->role == \App\Http\Role::ADMIN)
+                                                selected
+                                                @endif
+                                                value="{{ \App\Http\Role::ADMIN }}">Admin
+                                            </option>
+                                            <option
+                                                @if($user->role == \App\Http\Role::LIBRARIAN)
+                                                selected
+                                                @endif
+                                                value="{{ \App\Http\Role::LIBRARIAN }}">Librarian
+                                            </option>
+                                            <option
+                                                @if($user->role == \App\Http\Role::HIDE)
+                                                selected
+                                                @endif
+                                                value="{{ \App\Http\Role::HIDE }}">Hide
+                                            </option>
+                                        </select>
                                     </div>
-                                    @if (session('Error'))
-                                        <div class="alert alert-danger">{{session('Error')}}</div>
-                                    @endif
                                     <div class="form-group">
                                         <label for="inputClientCompany">Phone</label>
-                                        <input type="text" id="inputClientCompany" class="form-control" name="phone">
+                                        <input type="text" id="inputClientCompany" class="form-control" name="phone" value="{{$user->phone}}">
                                     </div>
                                     <div class="form-group">
                                         <label for="inputProjectLeader">Address</label>
-                                        <input type="text" id="inputProjectLeader" class="form-control" name="address">
+                                        <input type="text" id="inputProjectLeader" class="form-control" name="address" value="{{$user->address}}">
                                     </div>
                                     <div class="form-group">
                                         <label for="inputProjectLeader">Avatar</label>
-                                        <input type="file" id="inputProjectLeader" class="form-control" name="avatar">
+                                        <input type="file" id="inputProjectLeader" class="form-control" name="avatar" value="{{$user->avatar}}">
                                     </div>
                                 </div>
                                 <!-- /.card-body -->
