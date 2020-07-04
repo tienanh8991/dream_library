@@ -8,4 +8,5 @@ interface Role
 {
     const ADMIN = 1;
     const LIBRARIAN = 2;
+    const HIDE = 3;
 }
