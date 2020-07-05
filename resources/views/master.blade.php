@@ -27,6 +27,12 @@
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
     <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Overpass&display=swap" rel="stylesheet">
+    <style>
+        .wrapper {
+            font-family: 'Overpass', sans-serif;
+        }
+    </style>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 
@@ -66,7 +72,8 @@
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
         <!-- Brand Logo -->
         <a href="#" class="brand-link">
-            <img src="https://png.pngtree.com/template/20190904/ourlarge/pngtree-cloud-library-logo-image_301705.jpg" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+            <img src="https://png.pngtree.com/template/20190904/ourlarge/pngtree-cloud-library-logo-image_301705.jpg"
+                 alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
                  style="opacity: .8">
             <span class="brand-text font-weight-light" style="color: chocolate">DREAM LIBRARY</span>
         </a>
@@ -75,18 +82,21 @@
         <div class="sidebar">
             <!-- Sidebar user panel (optional) -->
             @if(\Illuminate\Support\Facades\Auth::user())
-            <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-                <div class="image">
-                    <img src="https://cdn1.vectorstock.com/i/1000x1000/40/30/user-glyph-icon-web-and-mobile-admin-sign-vector-18444030.jpg" class="img-circle elevation-2" alt="User Image">
+                <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+                    <div class="image">
+                        <img
+                            src="https://cdn1.vectorstock.com/i/1000x1000/40/30/user-glyph-icon-web-and-mobile-admin-sign-vector-18444030.jpg"
+                            class="img-circle elevation-2" alt="User Image">
+                    </div>
+                    <div class="info">
+                        <a href="#" class="d-block" style="color: green">{{auth()->user()->name}}</a>
+                    </div>
                 </div>
-                <div class="info">
-                    <a href="#" class="d-block" style="color: green">{{auth()->user()->name}}</a>
-                </div>
-            </div>
-            @endif
-            <!-- Sidebar Menu -->
+        @endif
+        <!-- Sidebar Menu -->
             <nav class="mt-2">
-                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
+                    data-accordion="false">
                     <!-- Add icons to the links using the .nav-icon class
                          with font-awesome or any other icon font library -->
                     <li class="nav-item has-treeview menu-open">
@@ -176,15 +186,9 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="pages/forms/general.html" class="nav-link">
+                                <a href="{{route('category.list')}}" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>List Category</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="pages/forms/advanced.html" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Add New</p>
                                 </a>
                             </li>
                         </ul>
@@ -258,7 +262,7 @@
         <!-- /.sidebar -->
     </aside>
 
-@yield('master.content')
+    @yield('master.content')
 
     <footer class="main-footer">
         <strong>Copyright &copy; 2014-2019 <a href="http://adminlte.io">AdminLTE.io</a>.</strong>
