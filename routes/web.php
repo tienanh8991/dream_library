@@ -45,7 +45,6 @@ Route::prefix('/')->group(function () {
         Route::get('destroy/{id}','BookController@destroy')->name('book.delete');
     });
     Route::prefix('customer')->group(function (){
-        Route::get('list','CustomerController@getAll')->name('customer.list');
 //        Route::get('create','CustomerController@create')->name('customer.create');
 //        Route::post('store','CustomerController@store')->name('customer.store');
         Route::get('edit/{id}','CustomerController@edit')->name('customer.edit');
