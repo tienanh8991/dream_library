@@ -163,15 +163,9 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="pages/UI/general.html" class="nav-link">
+                                <a href="{{route('book.list')}}" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Books List</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="pages/UI/icons.html" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Add New Book</p>
                                 </a>
                             </li>
                         </ul>

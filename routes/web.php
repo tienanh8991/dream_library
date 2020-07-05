@@ -36,6 +36,22 @@ Route::prefix('/')->group(function () {
         Route::post('update/{id}','CategoryController@update')->name('category.update');
 //        Route::get('destroy/{id}','CategoryController@destroy')->name('category.delete');
     });
+    Route::prefix('book')->group(function (){
+        Route::get('list','BookController@getAll')->name('book.list');
+        Route::get('create','BookController@create')->name('book.create');
+        Route::post('store','BookController@store')->name('book.store');
+        Route::get('edit/{id}','BookController@edit')->name('book.edit');
+        Route::post('update/{id}','BookController@update')->name('book.update');
+        Route::get('destroy/{id}','BookController@destroy')->name('book.delete');
+    });
+    Route::prefix('customer')->group(function (){
+        Route::get('list','CustomerController@getAll')->name('customer.list');
+//        Route::get('create','CustomerController@create')->name('customer.create');
+//        Route::post('store','CustomerController@store')->name('customer.store');
+        Route::get('edit/{id}','CustomerController@edit')->name('customer.edit');
+        Route::post('update/{id}','CustomerController@update')->name('customer.update');
+        Route::post('update/{id}','CustomerController@update')->name('customer.update');
+    });
 });
 
 
