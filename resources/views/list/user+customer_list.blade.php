@@ -182,11 +182,11 @@
                     </div>
                 </div>
                 <div class="card-body p-0">
-                    <a class="btn btn-success " href="#">
-                        <i class="fas fa-pencil-alt">
-                        </i>
-                        Create
-                    </a>
+{{--                    <a class="btn btn-success " href="#">--}}
+{{--                        <i class="fas fa-pencil-alt">--}}
+{{--                        </i>--}}
+{{--                        Create--}}
+{{--                    </a>--}}
                     <table class="table table-striped projects">
                         <thead>
                         <tr>

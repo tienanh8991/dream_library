@@ -62,7 +62,7 @@ class UserController extends Controller
         $user->avatar = $request->avatar->store('images','public');
 
         $user->save();
-
+        Toastr::success('Update complete !', 'Success', ["positionClass" => "toast-top-right"]);
         return redirect()->route('user.list');
 
     }
