@@ -6,5 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Customer extends Model
 {
-    //
+    public function borrows() {
+        return $this->hasMany('App\Borrow','customer_id');
+    }
 }

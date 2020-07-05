@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Customer;
 use App\Http\Requests\UserRequest;
 use App\Http\Role;
 use App\User;
@@ -17,8 +18,9 @@ class UserController extends Controller
     }
 
     public function getAll() {
+        $customers = Customer::all();
         $users = User::all();
-        return view('list.user+customer_list',compact('users'));
+        return view('list.user+customer_list',compact('users','customers'));
     }
 
     public function create() {

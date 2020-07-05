@@ -1,6 +1,6 @@
 @extends('master')
 @section('master.title')
-    Library | List User
+    Library | List User + Customer
 @endsection
 
 @section('master.content')
@@ -213,33 +213,38 @@
                         </tr>
                         </thead>
                         <tbody>
+                        @foreach($customers as $key => $customer)
                         <tr>
                             <td>
-                                #
+                                {{$customer->id}}
                             </td>
                             <td>
                                 <a>
-                                    AdminLTE v3
+                                    {{$customer->name}}
                                 </a>
                                 <br/>
                             </td>
                             <td>
                                 <a>
-                                    AdminLTE v3
+                                    {{$customer->code_id}}
                                 </a>
                             </td>
                             <td class="project_progress">
                                 <a>
-                                    AdminLTE v3
+                                    {{$customer->class}}
                                 </a>
                             </td>
                             <td>
                                 <a>
-                                    AdminLTE v3
+                                    {{$customer->birthday}}
                                 </a>
                             </td>
                             <td class="project-state">
-                                <span class="badge badge-success">Success</span>
+                                @if($customer->status == \App\Http\Controllers\CustomerStatus::BORROWED)
+                                    <span class="badge badge-success">Borrowed</span>
+                                @else
+                                    <span class="badge badge-success">Not Borrowed</span>
+                                @endif
                             </td>
                             <td class="project-actions text-right">
                                 <a class="btn btn-info btn-sm" href="#">
@@ -254,6 +259,7 @@
                                 </a>
                             </td>
                         </tr>
+                        @endforeach
                         </tbody>
                     </table>
                 </div>
