@@ -28,6 +28,9 @@ Route::prefix('/')->group(function () {
         Route::get('edit/{id}','UserController@editUser')->name('user.edit');
         Route::post('update/{id}','UserController@update')->name('user.update');
     });
+    Route::prefix('category')->group(function (){
+        Route::get('list','CategoryController@getAll')->name('category.list');
+    });
 });
 
 
