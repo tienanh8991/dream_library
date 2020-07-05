@@ -30,6 +30,11 @@ Route::prefix('/')->group(function () {
     });
     Route::prefix('category')->group(function (){
         Route::get('list','CategoryController@getAll')->name('category.list');
+        Route::get('create','CategoryController@create')->name('category.create');
+        Route::post('store','CategoryController@store')->name('category.store');
+        Route::get('edit/{id}','CategoryController@edit')->name('category.edit');
+        Route::post('update/{id}','CategoryController@update')->name('category.update');
+//        Route::get('destroy/{id}','CategoryController@destroy')->name('category.delete');
     });
 });
 

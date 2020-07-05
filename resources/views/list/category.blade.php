@@ -52,7 +52,7 @@
                                         Create
                                     </a>
                                 @else
-                                    <a class="btn btn-success " href="{{route('user.create')}}">
+                                    <a class="btn btn-success " href="{{route('category.create')}}">
                                         <i class="fas fa-pencil-alt">
                                         </i>
                                         Create
@@ -77,12 +77,12 @@
                                     @foreach($categories as $key => $category)
                                     <tr>
                                         <td>{{$category->id}}</td>
-                                        <td>{{ asset('/storage/' . $category->image) }}</td>
+                                        <td><img src="{{asset('storage/'. $category->image)}}" alt="" width="80" height="75"></td>
                                         <td>{{$category->title}}</td>
                                         <td>{{$category->created_at}}</td>
                                         @if(auth()->user()->role === \App\Http\Role::ADMIN)
                                             <td class="project-actions text-right">
-                                                <a class="btn btn-info btn-sm" href="">
+                                                <a class="btn btn-info btn-sm" href="{{route('category.edit',$category->id)}}">
                                                     <i class="fas fa-pencil-alt">
                                                     </i>
                                                     Edit
