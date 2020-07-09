@@ -25,9 +25,8 @@ class UserController extends Controller
     }
 
     public function getAll() {
-        $customers = Customer::all();
         $users = $this->userService->getAll();
-        return view('list.user+customer_list',compact('users','customers'));
+        return view('list.user',compact('users'));
     }
 
     public function create() {

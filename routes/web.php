@@ -46,6 +46,7 @@ Route::middleware(['auth'])->group(function () {
             Route::get('{id}/destroy','BookController@destroy')->name('book.delete');
         });
         Route::prefix('customers')->group(function (){
+            Route::get('/','CustomerController@getAll')->name('customer.list');
             Route::get('create','CustomerController@create')->name('customer.create');
             Route::post('store','CustomerController@store')->name('customer.store');
             Route::get('{id}/edit','CustomerController@edit')->name('customer.edit');
@@ -59,6 +60,14 @@ Route::middleware(['auth'])->group(function () {
             Route::get('{id}/edit','BorrowController@edit')->name('borrow.edit');
             Route::post('{id}/update','BorrowController@update')->name('borrow.update');
             Route::get('{id}/destroy','BorrowController@destroy')->name('borrow.delete');
+        });
+        Route::prefix('libraries')->group(function () {
+            Route::get('/','LibraryController@getAll')->name('library.list');
+            Route::get('create','LibraryController@create')->name('library.create');
+            Route::post('store','LibraryController@store')->name('library.store');
+            Route::get('{id}/edit','LibraryController@edit')->name('library.edit');
+            Route::post('{id}/update','LibraryController@update')->name('library.update');
+            Route::get('{id}/destroy','LibraryController@destroy')->name('library.delete');
         });
     });
 

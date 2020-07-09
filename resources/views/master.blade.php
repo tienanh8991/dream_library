@@ -119,7 +119,15 @@
                             <li class="nav-item">
                                 <a href="{{route('user.list')}}" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
-                                    <p>Users + Customers List</p>
+                                    <p>Users List</p>
+                                </a>
+                            </li>
+                        </ul>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="{{route('customer.list')}}" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Customer List</p>
                                 </a>
                             </li>
                         </ul>
@@ -134,21 +142,9 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="pages/charts/chartjs.html" class="nav-link">
+                                <a href="#" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
-                                    <p>Library A</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="pages/charts/flot.html" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Library B</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="pages/charts/inline.html" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Library C</p>
+                                    <p>List Library</p>
                                 </a>
                             </li>
                         </ul>
@@ -209,7 +205,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="pages/tables/jsgrid.html" class="nav-link">
+                                <a href="#" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>List Borrow Return</p>
                                 </a>
@@ -218,7 +214,7 @@
                     </li>
                     <li class="nav-header">EXAMPLES</li>
                     <li class="nav-item">
-                        <a href="pages/calendar.html" class="nav-link">
+                        <a href="#" class="nav-link">
                             <i class="nav-icon far fa-calendar-alt"></i>
                             <p>
                                 Calendar
@@ -235,9 +231,9 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="pages/examples/forgot-password.html" class="nav-link">
+                                <a href="#" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
-                                    <p>Forgot Password</p>
+                                    <p>Change Password</p>
                                 </a>
                             </li>
                             <li class="nav-item">
