@@ -197,13 +197,13 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="pages/tables/simple.html" class="nav-link">
+                                <a href="{{route('borrow.list')}}" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Borrows List</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="pages/tables/data.html" class="nav-link">
+                                <a href="{{route('borrow.create')}}" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Add New Borrow</p>
                                 </a>

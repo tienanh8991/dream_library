@@ -2,14 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Category;
 use App\Http\Requests\CategoryRequest;
+use App\Http\Services\CategoryService;
 use Brian2694\Toastr\Facades\Toastr;
 
 class CategoryController extends Controller
 {
+    protected $categoryService;
+    public function __construct(CategoryService $categoryService)
+    {
+        $this->categoryService = $categoryService;
+    }
+
     public function getAll() {
-        $categories = Category::all();
+        $categories = $this->categoryService->getAll();
         return view('list.category',compact('categories'));
     }
 
@@ -18,29 +24,17 @@ class CategoryController extends Controller
     }
 
     public function store(CategoryRequest $request) {
-        $category = new Category();
-        $category->title = $request->title;
-        $category->image = $request->image->store('images','public');
-
-        Toastr::success('Add new complete !', 'Success', ["positionClass" => "toast-top-right"]);
-        $category->save();
-
-        return redirect()->route('category.list');
+        $this->categoryService->create($request);
     }
 
     public function edit($id) {
-        $category = Category::findOrFail($id);
+        $category = $this->categoryService->find($id);
+
         return view('category.edit',compact('category'));
     }
 
     public function update(CategoryRequest $request, $id) {
-        $category = Category::findOrFail($id);
-        $category->title = $request->title;
-        $category->image = $request->image->store('images','public');
+        $this->categoryService->update($request, $id);
 
-        $category->save();
-        Toastr::success('Update complete !', 'Success', ["positionClass" => "toast-top-right"]);
-        $category->save();
-        return redirect()->route('category.list');
     }
 }

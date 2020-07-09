@@ -1,6 +1,6 @@
 @extends('master')
 @section('master.title')
-    Library | Add new user
+    Library | Add new customer
 @endsection
 
 @section('master.content')
@@ -12,12 +12,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1> Add New User</h1>
+                        <h1> Add New Customer</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Add User</li>
+                            <li class="breadcrumb-item active">Add Customer</li>
                         </ol>
                     </div>
                 </div>
@@ -25,8 +25,8 @@
         </section>
 
         <!-- Main content -->
-<div class="container ">
-            <form action="{{route('user.store')}}" method="post" enctype="multipart/form-data">
+        <div class="container ">
+            <form action="{{route('customer.store')}}" method="post" >
                 @csrf
                 <section class="content">
                     <div class="row">
@@ -47,41 +47,21 @@
                                         <input type="text" id="inputName" class="form-control" name="name">
                                     </div>
                                     <div class="form-group">
-                                        <label for="inputEmail">Email</label>
-                                        <input type="email" id="inputEmail" class="form-control" name="email">
+                                        <label for="inputEmail">Code ID</label>
+                                        <input type="text" id="inputEmail" class="form-control" name="code_id">
                                     </div>
                                     <div class="form-group">
-                                        <label for="inputPassword">Password</label>
-                                        <input type="password" id="inputPassword" class="form-control" name="password">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="inputConfirmPassword">Confirm Password</label>
-                                        <input type="password" id="inputConfirmPassword" class="form-control" name="confirmPassword">
-                                    </div>
-                                    @if (session('Error'))
-                                        <div class="alert alert-danger">{{session('Error')}}</div>
-                                    @endif
-
-                                    <div class="form-group">
-                                        <label for="inputStatus">Library</label>
-                                        <select class="form-control custom-select" name="category_id">
-                                            @foreach($libraries as $key => $library)
-                                                <option value="{{ $library->id }}">{{$library->name}}</option>
-                                            @endforeach
-                                        </select>
+                                        <label for="inputPassword">Class</label>
+                                        <input type="text" id="inputPassword" class="form-control" name="class">
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="inputClientCompany">Phone</label>
-                                        <input type="text" id="inputClientCompany" class="form-control" name="phone">
+                                        <label for="inputClientCompany">Address</label>
+                                        <input type="text" id="inputClientCompany" class="form-control" name="address">
                                     </div>
                                     <div class="form-group">
-                                        <label for="inputProjectLeader">Address</label>
-                                        <input type="text" id="inputProjectLeader" class="form-control" name="address">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="inputProjectLeader">Avatar</label>
-                                        <input type="file" id="inputProjectLeader" class="form-control" name="avatar">
+                                        <label for="inputProjectLeader">Day Of Birth</label>
+                                        <input type="date" id="inputProjectLeader" class="form-control" name="birthday">
                                     </div>
                                 </div>
                                 <!-- /.card-body -->
