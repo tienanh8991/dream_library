@@ -55,7 +55,7 @@
                             <th style="width: 20%" class="text-center">
                                 Name
                             </th>
-                            <th style="width: 10%"class="text-center">
+                            <th style="width: 10%" class="text-center">
                                 Avatar
                             </th>
                             <th style="width: 10%" class="text-center">
@@ -88,7 +88,8 @@
                                 <td class="text-center">
                                     <ul class="list-inline">
                                         <li class="list-inline-item">
-                                            <img alt="Avatar" height="75" width="75" src="{{asset('storage/'.$book->avatar)}}">
+                                            <img alt="Avatar" height="75" width="75"
+                                                 src="{{asset('storage/'.$book->avatar)}}">
                                         </li>
                                     </ul>
                                 </td>
@@ -109,9 +110,9 @@
                                 </td>
                                 <td class="project_progress text-center">
                                     @if($book->library_id !== \App\Http\Controllers\BookDefault::DEFAULT)
-                                    <a>
-                                        {{$book->library->name}}
-                                    </a>
+                                        <a>
+                                            {{$book->library->name}}
+                                        </a>
                                     @else
                                         <span class="badge badge-danger">Library Default</span>
                                     @endif
@@ -123,18 +124,20 @@
                                         <span class="badge badge-danger">Not Borrowed</span>
                                     @endif
                                 </td>
-                                <td class="project-actions text-right">
-                                    <a class="btn btn-info btn-sm" href="{{route('book.edit',$book->id)}}">
-                                        <i class="fas fa-pencil-alt">
-                                        </i>
-                                        Edit
-                                    </a>
-                                    <a class="btn btn-danger btn-sm" href="{{route('book.delete',$book->id)}}">
-                                        <i class="fas fa-trash">
-                                        </i>
-                                        Delete
-                                    </a>
-                                </td>
+                                @if($book->borrowed !== \App\Http\Controllers\BorrowStatus::BORROWED)
+                                    <td class="project-actions text-right">
+                                        <a class="btn btn-info btn-sm" href="{{route('book.edit',$book->id)}}">
+                                            <i class="fas fa-pencil-alt">
+                                            </i>
+                                            Edit
+                                        </a>
+                                        <a class="btn btn-danger btn-sm" href="{{route('book.delete',$book->id)}}">
+                                            <i class="fas fa-trash">
+                                            </i>
+                                            Delete
+                                        </a>
+                                    </td>
+                                @endif
                             </tr>
                         @endforeach
                         </tbody>
