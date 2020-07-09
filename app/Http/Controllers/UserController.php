@@ -36,6 +36,8 @@ class UserController extends Controller
 
     public function store(UserRequest $request) {
         $this->userService->create($request);
+
+        return redirect()->route('user.create');
     }
 
     public function editUser($id) {
@@ -47,6 +49,8 @@ class UserController extends Controller
     public function update(Request $request , $id) {
 
         $this->userService->update($request,$id);
+        Toastr::success('Update complete !', 'Success', ["positionClass" => "toast-top-right"]);
+        return redirect()->route('user.list');
 
     }
 

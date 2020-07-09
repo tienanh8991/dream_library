@@ -107,7 +107,7 @@
                             </p>
                         </a>
                     </li>
-                    <li class="nav-item has-treeview">
+                    <li class="nav-item has-treeview" >
                         <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-copy"></i>
                             <p>
@@ -115,6 +115,7 @@
                                 <i class="fas fa-angle-left right"></i>
                             </p>
                         </a>
+                        @if(\Illuminate\Support\Facades\Auth::user()->role == \App\Http\Role::ADMIN)
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
                                 <a href="{{route('user.list')}}" class="nav-link">
@@ -123,6 +124,7 @@
                                 </a>
                             </li>
                         </ul>
+                        @endif
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
                                 <a href="{{route('customer.list')}}" class="nav-link">
@@ -132,6 +134,7 @@
                             </li>
                         </ul>
                     </li>
+                    @if(\Illuminate\Support\Facades\Auth::user()->role == \App\Http\Role::ADMIN)
                     <li class="nav-item has-treeview">
                         <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-chart-pie"></i>
@@ -142,13 +145,14 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="#" class="nav-link">
+                                <a href="{{route('library.list')}}" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>List Library</p>
                                 </a>
                             </li>
                         </ul>
                     </li>
+                    @endif
                     <li class="nav-item has-treeview">
                         <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-tree"></i>
@@ -166,6 +170,7 @@
                             </li>
                         </ul>
                     </li>
+                    @if(\Illuminate\Support\Facades\Auth::user()->role == \App\Http\Role::ADMIN)
                     <li class="nav-item has-treeview">
                         <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-edit"></i>
@@ -183,6 +188,7 @@
                             </li>
                         </ul>
                     </li>
+                    @endif
                     <li class="nav-item has-treeview">
                         <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-table"></i>

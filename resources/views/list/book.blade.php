@@ -55,7 +55,7 @@
                             <th style="width: 20%" class="text-center">
                                 Name
                             </th>
-                            <th style="width: 10%"class="text-center">
+                            <th style="width: 10%" class="text-center">
                                 Avatar
                             </th>
                             <th style="width: 10%" class="text-center">
@@ -65,10 +65,10 @@
                                 Book Category
                             </th>
                             <th style="width: 8%" class="text-center">
-                                status
+                                Library
                             </th>
                             <th style="width: 20%" class="text-center">
-                                Description
+                                Borrowed
                             </th>
                             <th>
                             </th>
@@ -88,7 +88,8 @@
                                 <td class="text-center">
                                     <ul class="list-inline">
                                         <li class="list-inline-item">
-                                            <img alt="Avatar" height="75" width="75" src="{{asset('storage/'.$book->avatar)}}">
+                                            <img alt="Avatar" height="75" width="75"
+                                                 src="{{asset('storage/'.$book->avatar)}}">
                                         </li>
                                     </ul>
                                 </td>
@@ -99,34 +100,44 @@
                                     <br/>
                                 </td>
                                 <td class="project_progress text-center">
-                                    <a>
-                                        {{$book->category->title}}
-                                    </a>
-                                </td>
-                                <td class="project-state">
-                                    @if($book->status === \App\Http\Status::NEW)
-                                        <span class="badge badge-success">New</span>
+                                    @if($book->category_id !== \App\Http\Controllers\BookDefault::DEFAULT)
+                                        <a>
+                                            {{$book->category->title}}
+                                        </a>
                                     @else
-                                        <span class="badge badge-primary">Old</span>
+                                        <span class="badge badge-danger">Category Default</span>
                                     @endif
                                 </td>
                                 <td class="project_progress text-center">
-                                    <a>
-                                        {{$book->description}}
-                                    </a>
+                                    @if($book->library_id !== \App\Http\Controllers\BookDefault::DEFAULT)
+                                        <a>
+                                            {{$book->library->name}}
+                                        </a>
+                                    @else
+                                        <span class="badge badge-danger">Library Default</span>
+                                    @endif
                                 </td>
-                                <td class="project-actions text-right">
-                                    <a class="btn btn-info btn-sm" href="{{route('book.edit',$book->id)}}">
-                                        <i class="fas fa-pencil-alt">
-                                        </i>
-                                        Edit
-                                    </a>
-                                    <a class="btn btn-danger btn-sm" href="{{route('book.delete',$book->id)}}">
-                                        <i class="fas fa-trash">
-                                        </i>
-                                        Delete
-                                    </a>
+                                <td class="project-state">
+                                    @if($book->borrowed === \App\Http\Controllers\BorrowStatus::BORROWED)
+                                        <span class="badge badge-success">Borrowed</span>
+                                    @else
+                                        <span class="badge badge-danger">Not Borrowed</span>
+                                    @endif
                                 </td>
+                                @if($book->borrowed !== \App\Http\Controllers\BorrowStatus::BORROWED)
+                                    <td class="project-actions text-right">
+                                        <a class="btn btn-info btn-sm" href="{{route('book.edit',$book->id)}}">
+                                            <i class="fas fa-pencil-alt">
+                                            </i>
+                                            Edit
+                                        </a>
+                                        <a class="btn btn-danger btn-sm" href="{{route('book.delete',$book->id)}}">
+                                            <i class="fas fa-trash">
+                                            </i>
+                                            Delete
+                                        </a>
+                                    </td>
+                                @endif
                             </tr>
                         @endforeach
                         </tbody>

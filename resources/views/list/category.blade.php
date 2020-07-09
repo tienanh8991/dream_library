@@ -35,10 +35,12 @@
 
                                 <div class="card-tools">
                                     <div class="input-group input-group-sm" style="width: 150px;">
-                                        <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+                                        <input type="text" name="table_search" class="form-control float-right"
+                                               placeholder="Search">
 
                                         <div class="input-group-append">
-                                            <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
+                                            <button type="submit" class="btn btn-default"><i class="fas fa-search"></i>
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
@@ -75,26 +77,28 @@
                                     </thead>
                                     <tbody>
                                     @foreach($categories as $key => $category)
-                                    <tr>
-                                        <td>{{$category->id}}</td>
-                                        <td><img src="{{asset('storage/'. $category->image)}}" alt="" width="80" height="75"></td>
-                                        <td>{{$category->title}}</td>
-                                        <td>{{$category->created_at}}</td>
-                                        @if(auth()->user()->role === \App\Http\Role::ADMIN)
-                                            <td class="project-actions text-right">
-                                                <a class="btn btn-info btn-sm" href="{{route('category.edit',$category->id)}}">
-                                                    <i class="fas fa-pencil-alt">
-                                                    </i>
-                                                    Edit
-                                                </a>
-                                                <a class="btn btn-danger btn-sm" href="">
-                                                    <i class="fas fa-trash">
-                                                    </i>
-                                                    Delete
-                                                </a>
-                                            </td>
-                                        @endif
-                                    </tr>
+                                            <tr>
+                                                <td>{{$key+=1}}</td>
+                                                <td><img src="{{asset('storage/'. $category->image)}}" alt="" width="80"
+                                                         height="75"></td>
+                                                <td>{{$category->title}}</td>
+                                                <td>{{$category->created_at}}</td>
+                                                @if(auth()->user()->role === \App\Http\Role::ADMIN)
+                                                    <td class="project-actions text-right">
+                                                        <a class="btn btn-info btn-sm"
+                                                           href="{{route('category.edit',$category->id)}}">
+                                                            <i class="fas fa-pencil-alt">
+                                                            </i>
+                                                            Edit
+                                                        </a>
+                                                        <a class="btn btn-danger btn-sm" href="{{route('category.delete',$category->id)}}">
+                                                            <i class="fas fa-trash">
+                                                            </i>
+                                                            Delete
+                                                        </a>
+                                                    </td>
+                                                @endif
+                                            </tr>
                                     @endforeach
                                     </tbody>
                                 </table>

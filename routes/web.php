@@ -35,7 +35,7 @@ Route::middleware(['auth'])->group(function () {
             Route::post('store','CategoryController@store')->name('category.store');
             Route::get('{id}/edit','CategoryController@edit')->name('category.edit');
             Route::post('{id}/update','CategoryController@update')->name('category.update');
-//        Route::get('destroy/{id}','CategoryController@destroy')->name('category.delete');
+            Route::get('{id}/destroy','CategoryController@destroy')->name('category.delete');
         });
         Route::prefix('books')->group(function (){
             Route::get('/','BookController@getAll')->name('book.list');

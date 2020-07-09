@@ -5,6 +5,7 @@ namespace App\Http\Services;
 
 
 use App\Book;
+use App\Http\Controllers\BorrowStatus;
 use App\Http\Repositories\BookRepository;
 use Brian2694\Toastr\Facades\Toastr;
 
@@ -29,13 +30,14 @@ class BookService
         $book->name = $request->name;
         $book->author = $request->author;
         $book->category_id = $request->category_id;
+        $book->library_id = auth()->user()->library_id;
         $book->status = $request->status;
+        $book->borrowed = BorrowStatus::NOT_BORROWED;
         $book->description = $request->desc;
         $book->avatar = $request->avatar->store('images','public');
 
         $this->bookRepo->save($book);
-        Toastr::success('Add new complete !', 'Success', ["positionClass" => "toast-top-right"]);
-        return redirect()->route('book.list');
+
     }
 
     public function update($request , $id) {
@@ -48,7 +50,6 @@ class BookService
         $book->avatar = $request->avatar->store('images','public');
 
         $this->bookRepo->save($book);
-        Toastr::success('Update complete !', 'Success', ["positionClass" => "toast-top-right"]);
-        return redirect()->route('book.list');
+
     }
 }
