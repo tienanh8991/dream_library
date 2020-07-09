@@ -1,6 +1,6 @@
 @extends('master')
 @section('master.title')
-    Library | Add new Book
+    Library | Add new Library
 @endsection
 
 @section('master.content')
@@ -12,12 +12,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1> Add New Book</h1>
+                        <h1> Add New Library</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Add Book</li>
+                            <li class="breadcrumb-item active">Add Library</li>
                         </ol>
                     </div>
                 </div>
@@ -26,7 +26,7 @@
 
         <!-- Main content -->
         <div class="container ">
-            <form action="{{route('book.store')}}" method="post" enctype="multipart/form-data">
+            <form action="{{route('library.store')}}" method="post" enctype="multipart/form-data">
                 @csrf
                 <section class="content">
                     <div class="row">
@@ -47,28 +47,12 @@
                                         <input type="text" id="inputName" class="form-control" name="name">
                                     </div>
                                     <div class="form-group">
-                                        <label for="inputName">Author</label>
-                                        <input type="text" id="inputName" class="form-control" name="author">
+                                        <label for="inputName">Phone</label>
+                                        <input type="text" id="inputName" class="form-control" name="phone">
                                     </div>
                                     <div class="form-group">
-                                        <label for="inputStatus">Book Category</label>
-                                        <select class="form-control custom-select" name="category_id">
-                                            @foreach($categories as $key => $category)
-                                            <option value="{{ $category->id }}">{{$category->title}}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="inputStatus">Status</label>
-                                        <select class="form-control custom-select" name="status">
-                                            <option value="{{ \App\Http\Status::NEW }}" selected>New</option>
-                                            <option value="{{ \App\Http\Status::OLD }}">Old</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="inputName">Description</label>
-                                        <textarea id="inputName" class="form-control" name="desc"></textarea>
+                                        <label for="inputName">Address</label>
+                                        <input type="text" id="inputName" class="form-control" name="address">
                                     </div>
                                     <div class="form-group">
                                         <label for="inputEmail">Avatar</label>
@@ -83,7 +67,7 @@
                     <div class="row">
                         <div class="col-12">
                             <button type="submit" class="btn btn-success">Submit</button>
-                            <a href="{{route('book.list')}}" class="btn btn-secondary">Cancel</a>
+                            <a href="{{route('library.list')}}" class="btn btn-secondary">Cancel</a>
                         </div>
                     </div>
                 </section>

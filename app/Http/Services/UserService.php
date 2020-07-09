@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\Http\Services;
-
 
 use App\Http\Repositories\UserRepository;
 use App\Http\Role;
@@ -41,10 +39,8 @@ class UserService
         if ($request->password === $request->confirmPassword){
             Toastr::success('Add new complete !', 'Success', ["positionClass" => "toast-top-right"]);
             $this->userRepo->save($user);
-            return redirect()->route('user.list');
         }else{
             $request->session()->flash('Error','Password does not match !');
-            return redirect()->route('user.create');
         }
     }
 
@@ -58,7 +54,6 @@ class UserService
         $user->avatar = $request->avatar->store('images','public');
 
         $this->userRepo->save($user);
-        Toastr::success('Update complete !', 'Success', ["positionClass" => "toast-top-right"]);
-        return redirect()->route('user.list');
+
     }
 }

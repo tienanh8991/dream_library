@@ -65,10 +65,10 @@
                                 Book Category
                             </th>
                             <th style="width: 8%" class="text-center">
-                                status
+                                Library
                             </th>
                             <th style="width: 20%" class="text-center">
-                                Description
+                                Borrowed
                             </th>
                             <th>
                             </th>
@@ -99,21 +99,29 @@
                                     <br/>
                                 </td>
                                 <td class="project_progress text-center">
-                                    <a>
-                                        {{$book->category->title}}
-                                    </a>
-                                </td>
-                                <td class="project-state">
-                                    @if($book->status === \App\Http\Status::NEW)
-                                        <span class="badge badge-success">New</span>
+                                    @if($book->category_id !== \App\Http\Controllers\BookDefault::DEFAULT)
+                                        <a>
+                                            {{$book->category->title}}
+                                        </a>
                                     @else
-                                        <span class="badge badge-primary">Old</span>
+                                        <span class="badge badge-danger">Category Default</span>
                                     @endif
                                 </td>
                                 <td class="project_progress text-center">
+                                    @if($book->library_id !== \App\Http\Controllers\BookDefault::DEFAULT)
                                     <a>
-                                        {{$book->description}}
+                                        {{$book->library->name}}
                                     </a>
+                                    @else
+                                        <span class="badge badge-danger">Library Default</span>
+                                    @endif
+                                </td>
+                                <td class="project-state">
+                                    @if($book->borrowed === \App\Http\Controllers\BorrowStatus::BORROWED)
+                                        <span class="badge badge-success">Borrowed</span>
+                                    @else
+                                        <span class="badge badge-danger">Not Borrowed</span>
+                                    @endif
                                 </td>
                                 <td class="project-actions text-right">
                                     <a class="btn btn-info btn-sm" href="{{route('book.edit',$book->id)}}">
