@@ -54,7 +54,7 @@ Library | Edit Book
                                 <div class="form-group">
                                     <label for="inputStatus">Book Category</label>
                                     <select class="form-control custom-select" name="category_id" >
-                                            <option value="{{ $book->category_id }}" selected>{{$book->category->title}}</option>
+                                            <option value="{{ $book->category_id }}" selected disabled>{{$book->category->title}}</option>
                                         @foreach($categories as $key => $category)
                                             <option value="{{ $category->id }}">{{$category->title}}</option>
                                         @endforeach

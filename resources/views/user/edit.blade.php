@@ -78,6 +78,14 @@
                                         </select>
                                     </div>
                                     <div class="form-group">
+                                        <label for="inputStatus">Library</label>
+                                        <select class="form-control custom-select" name="category_id">
+                                            @foreach($libraries as $key => $library)
+                                                <option value="{{ $library->id }}">{{$library->name}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
                                         <label for="inputClientCompany">Phone</label>
                                         <input type="text" id="inputClientCompany" class="form-control" name="phone" value="{{$user->phone}}">
                                     </div>

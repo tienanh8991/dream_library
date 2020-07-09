@@ -182,11 +182,11 @@
                     </div>
                 </div>
                 <div class="card-body p-0">
-{{--                    <a class="btn btn-success " href="#">--}}
-{{--                        <i class="fas fa-pencil-alt">--}}
-{{--                        </i>--}}
-{{--                        Create--}}
-{{--                    </a>--}}
+                    <a class="btn btn-success " href="{{route('customer.create')}}">
+                        <i class="fas fa-pencil-alt">
+                        </i>
+                        Create
+                    </a>
                     <table class="table table-striped projects">
                         <thead>
                         <tr>
@@ -240,10 +240,10 @@
                                 </a>
                             </td>
                             <td class="project-state">
-                                @if($customer->status == \App\Http\Controllers\CustomerStatus::BORROWED)
+                                @if($customer->status == \App\Http\Controllers\BorrowStatus::BORROWED)
                                     <span class="badge badge-success">Borrowed</span>
                                 @else
-                                    <span class="badge badge-success">Not Borrowed</span>
+                                    <span class="badge badge-danger">Not Borrowed</span>
                                 @endif
                             </td>
                             <td class="project-actions text-right">
