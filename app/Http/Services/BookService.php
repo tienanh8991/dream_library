@@ -42,12 +42,19 @@ class BookService
 
     public function update($request , $id) {
         $book = $this->bookRepo->find($id);
+        dd($book);
         $book->name = $request->name;
         $book->author = $request->author;
         $book->category_id = $request->category_id;
+        $book->library_id = auth()->user()->library_id;
         $book->status = $request->status;
+        $book->borrowed = BorrowStatus::NOT_BORROWED;
         $book->description = $request->desc;
-        $book->avatar = $request->avatar->store('images','public');
+        if ($request->avatar !== null){
+            $book->avatar = $request->avatar->store('images','public');
+        }else{
+            $book->avatar = $book->avatar->store('','public');
+        }
 
         $this->bookRepo->save($book);
 

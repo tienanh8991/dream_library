@@ -5,7 +5,6 @@ namespace App\Http\Services;
 
 use App\Category;
 use App\Http\Repositories\CategoryRepository;
-use Brian2694\Toastr\Facades\Toastr;
 
 class CategoryService
 {
@@ -34,7 +33,11 @@ class CategoryService
     public function update($request , $id) {
         $category = $this->find($id);
         $category->title = $request->title;
-        $category->image = $request->image->store('images','public');
+        if ($request->image !== null){
+            $category->image = $request->image->store('images','public');
+        }else{
+            $category->image = $request->image->store('','public');
+        }
 
         $this->categoryRepo->save($category);
 

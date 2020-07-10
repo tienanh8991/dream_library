@@ -56,7 +56,12 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="inputEmail">Avatar</label>
-                                        <input type="file" id="inputEmail" class="form-control" name="avatar">
+                                        <input type="file" id="inputEmail" class="form-control" name="avatar" value="{{$library->avatar}}">
+                                        <div style="color: red">
+                                            @if($errors->has('avatar'))
+                                                {{$errors->first('avatar')}}
+                                            @endif
+                                        </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-12">

@@ -26,47 +26,57 @@
 
         <!-- Main content -->
 
-            <form action="{{route('category.store')}}" method="post" enctype="multipart/form-data">
-                @csrf
-                <section class="content">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="card card-primary">
-                                <div class="card-header">
-                                    <h3 class="card-title">Information</h3>
+        <form action="{{route('category.store')}}" method="post" enctype="multipart/form-data">
+            @csrf
+            <section class="content">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card card-primary">
+                            <div class="card-header">
+                                <h3 class="card-title">Information</h3>
 
-                                    <div class="card-tools">
-                                        <button type="button" class="btn btn-tool" data-card-widget="collapse"
-                                                data-toggle="tooltip" title="Collapse">
-                                            <i class="fas fa-minus"></i></button>
-                                    </div>
+                                <div class="card-tools">
+                                    <button type="button" class="btn btn-tool" data-card-widget="collapse"
+                                            data-toggle="tooltip" title="Collapse">
+                                        <i class="fas fa-minus"></i></button>
                                 </div>
-                                <div class="card-body">
-                                    <div class="form-group">
-                                        <label for="inputName">Title</label>
-                                        <input type="text" id="inputName" class="form-control" name="title">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="inputEmail">Image</label>
-                                        <input type="file" id="inputEmail" class="form-control" name="image">
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-12">
-                                            <button type="submit" class="btn btn-success">Submit</button>
-                                            <a href="{{route('category.list')}}" class="btn btn-secondary">Cancel</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- /.card-body -->
                             </div>
-                            <!-- /.card -->
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label for="inputName">Title</label>
+                                    <input type="text" id="inputName" class="form-control" name="title">
+                                    <div style="color: red">
+                                        @if($errors->has('title'))
+                                            {{$errors->fisrt('title')}}
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputEmail">Image</label>
+                                    <input type="file" id="inputEmail" class="form-control" name="image">
+                                    <div style="color: red">
+                                        @if($errors->has('image'))
+                                            {{$errors->fisrt('image')}}
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <button type="submit" class="btn btn-success">Submit</button>
+                                        <a href="{{route('category.list')}}" class="btn btn-secondary">Cancel</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /.card-body -->
                         </div>
+                        <!-- /.card -->
                     </div>
+                </div>
 
-                </section>
-            </form>
-        </div>
-        <!-- /.content -->
+            </section>
+        </form>
+    </div>
+    <!-- /.content -->
 
     <!-- /.content-wrapper -->
 

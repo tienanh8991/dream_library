@@ -55,7 +55,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="inputStatus">Role</label>
-                                        <select class="form-control custom-select" name="role">
+                                        <select class="form-control custom-select" name="role" >
                                             <option
                                                 @if($user->role == \App\Http\Role::ADMIN)
                                                 selected
@@ -95,6 +95,11 @@
                                     <div class="form-group">
                                         <label for="inputProjectLeader">Avatar</label>
                                         <input type="file" id="inputProjectLeader" class="form-control" name="avatar" value="{{$user->avatar}}">
+                                        <div style="color: red">
+                                            @if($errors->has('avatar'))
+                                                {{$errors->first('avatar')}}
+                                            @endif
+                                        </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-12">

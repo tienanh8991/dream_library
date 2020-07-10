@@ -46,11 +46,21 @@
                                         <label for="inputName">Name</label>
                                         <input type="text" id="inputName" class="form-control" name="name"
                                                value="{{$book->name}}">
+                                        <div style="color: red">
+                                            @if($errors->has('name'))
+                                                {{$errors->first('name')}}
+                                            @endif
+                                        </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="inputName">Author</label>
                                         <input type="text" id="inputName" class="form-control" name="author"
                                                value="{{$book->author}}">
+                                        <div style="color: red">
+                                            @if($errors->has('author'))
+                                                {{$errors->first('author')}}
+                                            @endif
+                                        </div>
                                     </div>
 
                                     <div class="form-group">
@@ -68,6 +78,11 @@
                                                 @endforeach
                                             @endif
                                         </select>
+                                        <div style="color: red">
+                                            @if($errors->has('category_id'))
+                                                {{$errors->first('category_id')}}
+                                            @endif
+                                        </div>
                                     </div>
 
                                     <div class="form-group">
@@ -96,7 +111,12 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="inputEmail">Avatar</label>
-                                        <input type="file" id="inputEmail" class="form-control" name="avatar">
+                                        <input type="file" id="inputEmail" class="form-control" name="avatar" value="{{$book->avatar}}">
+                                        <div style="color: red">
+                                            @if($errors->has('avatar'))
+                                                {{$errors->first('avatar')}}
+                                            @endif
+                                        </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-12">

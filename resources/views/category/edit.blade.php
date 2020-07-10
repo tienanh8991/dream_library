@@ -48,7 +48,12 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="inputEmail">Image</label>
-                                        <input type="file" id="inputEmail" class="form-control" name="image">
+                                        <input type="file" id="inputEmail" class="form-control" name="image" value="{{$category->image}}">
+                                    </div>
+                                    <div style="color: red">
+                                        @if($errors->has('image'))
+                                            {{$errors->first('image')}}
+                                        @endif
                                     </div>
                                     <div class="row">
                                         <div class="col-12">
