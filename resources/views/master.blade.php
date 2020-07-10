@@ -29,8 +29,9 @@
     <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Overpass&display=swap" rel="stylesheet">
     <style>
-        .wrapper {
+        .content {
             font-family: 'Overpass', sans-serif;
+            margin-left: 15px;
         }
     </style>
 </head>
@@ -107,25 +108,34 @@
                             </p>
                         </a>
                     </li>
-                    <li class="nav-item has-treeview" >
+                    @if(\Illuminate\Support\Facades\Auth::user()->role == \App\Http\Role::ADMIN)
+                        <li class="nav-item has-treeview">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon 	fas fa-user-alt"></i>
+                                <p>
+                                    Users
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav-treeview">
+                                <li class="nav-item ">
+                                    <a href="{{route('user.list')}}" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Users List</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    @endif
+                    <li class="nav-item has-treeview">
                         <a href="#" class="nav-link">
-                            <i class="nav-icon fas fa-copy"></i>
+                            <i class="nav-icon fas fa-user-friends"></i>
                             <p>
-                                Users
+                                Customers
                                 <i class="fas fa-angle-left right"></i>
                             </p>
                         </a>
-                        @if(\Illuminate\Support\Facades\Auth::user()->role == \App\Http\Role::ADMIN)
-                        <ul class="nav nav-treeview">
-                            <li class="nav-item">
-                                <a href="{{route('user.list')}}" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Users List</p>
-                                </a>
-                            </li>
-                        </ul>
-                        @endif
-                        <ul class="nav nav-treeview">
+                        <ul class="nav-treeview">
                             <li class="nav-item">
                                 <a href="{{route('customer.list')}}" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
@@ -135,33 +145,33 @@
                         </ul>
                     </li>
                     @if(\Illuminate\Support\Facades\Auth::user()->role == \App\Http\Role::ADMIN)
-                    <li class="nav-item has-treeview">
-                        <a href="#" class="nav-link">
-                            <i class="nav-icon fas fa-chart-pie"></i>
-                            <p>
-                                Library
-                                <i class="right fas fa-angle-left"></i>
-                            </p>
-                        </a>
-                        <ul class="nav nav-treeview">
-                            <li class="nav-item">
-                                <a href="{{route('library.list')}}" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>List Library</p>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
+                        <li class="nav-item has-treeview">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-building"></i>
+                                <p>
+                                    Library
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav-treeview">
+                                <li class="nav-item">
+                                    <a href="{{route('library.list')}}" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>List Library</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
                     @endif
                     <li class="nav-item has-treeview">
                         <a href="#" class="nav-link">
-                            <i class="nav-icon fas fa-tree"></i>
+                            <i class="nav-icon fas fa-book"></i>
                             <p>
                                 Books
                                 <i class="fas fa-angle-left right"></i>
                             </p>
                         </a>
-                        <ul class="nav nav-treeview">
+                        <ul class="nav-treeview">
                             <li class="nav-item">
                                 <a href="{{route('book.list')}}" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
@@ -171,33 +181,33 @@
                         </ul>
                     </li>
                     @if(\Illuminate\Support\Facades\Auth::user()->role == \App\Http\Role::ADMIN)
-                    <li class="nav-item has-treeview">
-                        <a href="#" class="nav-link">
-                            <i class="nav-icon fas fa-edit"></i>
-                            <p>
-                                Category
-                                <i class="fas fa-angle-left right"></i>
-                            </p>
-                        </a>
-                        <ul class="nav nav-treeview">
-                            <li class="nav-item">
-                                <a href="{{route('category.list')}}" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>List Category</p>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
+                        <li class="nav-item has-treeview">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon 	fas fa-file-alt"></i>
+                                <p>
+                                    Category
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav-treeview">
+                                <li class="nav-item">
+                                    <a href="{{route('category.list')}}" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>List Category</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
                     @endif
                     <li class="nav-item has-treeview">
                         <a href="#" class="nav-link">
-                            <i class="nav-icon fas fa-table"></i>
+                            <i class="nav-icon 	fas fa-clipboard"></i>
                             <p>
                                 Borrows
                                 <i class="fas fa-angle-left right"></i>
                             </p>
                         </a>
-                        <ul class="nav nav-treeview">
+                        <ul class="nav-treeview">
                             <li class="nav-item">
                                 <a href="{{route('borrow.list')}}" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
@@ -229,13 +239,13 @@
                     </li>
                     <li class="nav-item has-treeview">
                         <a href="#" class="nav-link">
-                            <i class="nav-icon far fa-plus-square"></i>
+                            <i class="nav-icon fas fa-exclamation-circle"></i>
                             <p>
                                 Extras
                                 <i class="fas fa-angle-left right"></i>
                             </p>
                         </a>
-                        <ul class="nav nav-treeview">
+                        <ul class="nav-treeview">
                             <li class="nav-item">
                                 <a href="#" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
@@ -248,7 +258,6 @@
                                     <p>Logout</p>
                                 </a>
                             </li>
-
                         </ul>
                     </li>
                 </ul>
@@ -257,9 +266,9 @@
         </div>
         <!-- /.sidebar -->
     </aside>
-
-    @yield('master.content')
-
+    <div class="content">
+        @yield('master.content')
+    </div>
     <footer class="main-footer">
         <strong>Copyright &copy; 2014-2019 <a href="http://adminlte.io">AdminLTE.io</a>.</strong>
         All rights reserved.
@@ -287,6 +296,7 @@
 <script>
     $.widget.bridge('uibutton', $.ui.button)
 </script>
+
 <!-- Bootstrap 4 -->
 <script src="{{asset('plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 <!-- ChartJS -->

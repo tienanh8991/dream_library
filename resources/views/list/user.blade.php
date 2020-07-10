@@ -17,7 +17,7 @@
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">List</li>
+                            <li class="breadcrumb-item active">User / List</li>
                         </ol>
                     </div>
                 </div>
@@ -41,6 +41,7 @@
                     </div>
                 </div>
                 <div class="card-body p-0">
+                    <div class="" style="margin-left: 10px">
                     @if(auth()->user()->role !== \App\Http\Role::ADMIN)
                         <a class="btn btn-success " href="#" hidden>
                             <i class="fas fa-pencil-alt">
@@ -54,6 +55,7 @@
                             Create
                         </a>
                     @endif
+                    </div>
                     <table class="table table-striped projects">
                         <thead>
                         <tr>

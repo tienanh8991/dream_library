@@ -17,7 +17,7 @@
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Edit User</li>
+                            <li class="breadcrumb-item active">User / Edit</li>
                         </ol>
                     </div>
                 </div>
@@ -25,7 +25,6 @@
         </section>
 
         <!-- Main content -->
-        <div class="container ">
             <form action="{{route('user.update',$user->id)}}" method="post" enctype="multipart/form-data">
                 @csrf
                 <section class="content">
@@ -97,23 +96,23 @@
                                         <label for="inputProjectLeader">Avatar</label>
                                         <input type="file" id="inputProjectLeader" class="form-control" name="avatar" value="{{$user->avatar}}">
                                     </div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <button type="submit" class="btn btn-success">Submit</button>
+                                            <a href="{{route('user.list')}}" class="btn btn-secondary">Cancel</a>
+                                        </div>
+                                    </div>
                                 </div>
                                 <!-- /.card-body -->
                             </div>
                             <!-- /.card -->
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-12">
-                            <button type="submit" class="btn btn-success">Submit</button>
-                            <a href="{{route('user.list')}}" class="btn btn-secondary">Cancel</a>
-                        </div>
-                    </div>
+
                 </section>
             </form>
         </div>
         <!-- /.content -->
-    </div>
     <!-- /.content-wrapper -->
 
 @endsection

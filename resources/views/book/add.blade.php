@@ -17,7 +17,7 @@
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Add Book</li>
+                            <li class="breadcrumb-item active">Book / Create</li>
                         </ol>
                     </div>
                 </div>
@@ -25,7 +25,7 @@
         </section>
 
         <!-- Main content -->
-        <div class="container ">
+
             <form action="{{route('book.store')}}" method="post" enctype="multipart/form-data">
                 @csrf
                 <section class="content">
@@ -74,23 +74,24 @@
                                         <label for="inputEmail">Avatar</label>
                                         <input type="file" id="inputEmail" class="form-control" name="avatar">
                                     </div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <button type="submit" class="btn btn-success">Submit</button>
+                                            <a href="{{route('book.list')}}" class="btn btn-secondary">Cancel</a>
+                                        </div>
+                                    </div>
                                 </div>
                                 <!-- /.card-body -->
                             </div>
                             <!-- /.card -->
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-12">
-                            <button type="submit" class="btn btn-success">Submit</button>
-                            <a href="{{route('book.list')}}" class="btn btn-secondary">Cancel</a>
-                        </div>
-                    </div>
+
                 </section>
             </form>
         </div>
         <!-- /.content -->
-    </div>
+
     <!-- /.content-wrapper -->
 
 @endsection
