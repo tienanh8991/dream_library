@@ -28,6 +28,8 @@ Route::middleware(['auth'])->group(function () {
             Route::get('{id}/restore','UserController@restoreUser')->name('user.restore');
             Route::get('{id}/edit','UserController@editUser')->name('user.edit');
             Route::post('{id}/update','UserController@update')->name('user.update');
+            Route::get('profile','UserController@getProfile')->name('user.profile');
+            Route::post('/profile','UserController@editProfile')->name('update.profile');
         });
         Route::prefix('categories')->group(function (){
             Route::get('/','CategoryController@getAll')->name('category.list');
@@ -44,6 +46,8 @@ Route::middleware(['auth'])->group(function () {
             Route::get('{id}/edit','BookController@edit')->name('book.edit');
             Route::post('{id}/update','BookController@update')->name('book.update');
             Route::get('{id}/destroy','BookController@destroy')->name('book.delete');
+            Route::get('/search','BookController@search')->name('book.search');
+            Route::get('/render','BookController@render')->name('book.render');
         });
         Route::prefix('customers')->group(function (){
             Route::get('/','CustomerController@getAll')->name('customer.list');
@@ -51,15 +55,17 @@ Route::middleware(['auth'])->group(function () {
             Route::post('store','CustomerController@store')->name('customer.store');
             Route::get('{id}/edit','CustomerController@edit')->name('customer.edit');
             Route::post('{id}/update','CustomerController@update')->name('customer.update');
-            Route::post('{id}/update','CustomerController@update')->name('customer.update');
+            Route::post('{id}/destroy','CustomerController@destroy')->name('customer.delete');
+            Route::get('/search','CustomerController@search')->name('customer.search');
+            Route::get('/render','CustomerController@render')->name('customer.render');
+
         });
         Route::prefix('borrows')->group(function (){
-            Route::get('/','BorrowController@getAll')->name('borrow.list');
+            Route::get('/','BorrowController@getBorrow')->name('borrow.list');
             Route::get('create','BorrowController@create')->name('borrow.create');
-            Route::post('store','BorrowController@store')->name('borrow.store');
-            Route::get('{id}/edit','BorrowController@edit')->name('borrow.edit');
-            Route::post('{id}/update','BorrowController@update')->name('borrow.update');
-            Route::get('{id}/destroy','BorrowController@destroy')->name('borrow.delete');
+            Route::post('/store','BorrowController@store')->name('borrow.store');
+            Route::get('{id}/return','BorrowController@returnBook')->name('borrow.return');
+            Route::get('return','BorrowController@showReturnBorrows')->name('borrow.return.list');
         });
         Route::prefix('libraries')->group(function () {
             Route::get('/','LibraryController@getAll')->name('library.list');

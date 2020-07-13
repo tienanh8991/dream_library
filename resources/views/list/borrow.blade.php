@@ -1,6 +1,6 @@
 @extends('master')
 @section('master.title')
-    Library | List User + Customer
+    Library | List Borrows
 @endsection
 
 @section('master.content')
@@ -48,9 +48,6 @@
                             <th style="width: 1%">
                                 #
                             </th>
-                            <th style="width: 10%">
-                                Coupon Name
-                            </th>
                             <th style="width: 15%">
                                 Customer
                             </th>
@@ -75,23 +72,17 @@
                                 </td>
                                 <td>
                                     <a>
-                                        {{$borrow->coupon_name}}
-                                    </a>
-                                    <br/>
-                                </td>
-                                <td>
-                                    <a>
                                         {{$borrow->customer->name}}
                                     </a>
                                 </td>
                                 <td class="project_progress">
                                     <a>
-                                        {{$borrow->book_name}}
+                                        {{$borrow->book->name}}
                                     </a>
                                 </td>
                                 <td>
                                     <a>
-                                        {{$borrow->created_at}}
+                                        {{$borrow->borrow_date}}
                                     </a>
                                 </td>
                                 <td>
@@ -101,15 +92,15 @@
                                 </td>
 
                                 <td class="project-actions text-right">
-                                    <a class="btn btn-info btn-sm" href="{{route('borrow.edit',$borrow->id)}}">
-                                        <i class="fas fa-pencil-alt">
+{{--                                    <a class="btn btn-info btn-sm" >--}}
+{{--                                        <i class="fas fa-pencil-alt">--}}
+{{--                                        </i>--}}
+{{--                                        Borrows Detail--}}
+{{--                                    </a>--}}
+                                    <a class="btn btn-success btn-sm" href="{{route('borrow.return',$borrow->id)}}">
+                                        <i class="fas fa-arrow-left">
                                         </i>
-                                        Edit
-                                    </a>
-                                    <a class="btn btn-success btn-sm" href="#">
-                                        <i class="fas fa-trash">
-                                        </i>
-                                        Delete
+                                        Return Book
                                     </a>
                                 </td>
                             </tr>

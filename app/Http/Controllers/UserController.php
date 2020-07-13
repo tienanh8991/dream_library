@@ -29,6 +29,13 @@ class UserController extends Controller
         return view('list.user', compact('users'));
     }
 
+    public function getProfile()
+    {
+        $libraries = Library::all();
+        $user = auth()->user();
+        return view('user.profile',compact('user','libraries'));
+    }
+
     public function create()
     {
         $libraries = Library::all();
@@ -78,5 +85,30 @@ class UserController extends Controller
         Toastr::success('Restore user complete !', 'Success', ["positionClass" => "toast-top-right"]);
 
         return redirect()->route('user.list');
+    }
+
+    public function editProfile(Request $request)
+    {
+        $user = $this->userService->find(auth()->user()->id);
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = $request->password;
+        $user->phone = $request->phone;
+        $user->address = $request->address;
+//        $user->avatar = $request->avatar->store('images','public');
+        if (auth()->user()->role === Role::ADMIN ){
+            $user->role = Role::ADMIN;
+            $user->library_id = null;
+        }elseif (auth()->user()->role === Role::LIBRARIAN){
+            $user->role = Role::LIBRARIAN;
+            $user->library_id = $request->library_id;
+        }
+
+        $user->save();
+
+        Toastr::success('Update complete !', 'Success', ["positionClass" => "toast-top-right"]);
+
+        return response()->json($user);
+
     }
 }

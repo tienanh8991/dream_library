@@ -66,7 +66,7 @@
                                     <div class="row">
                                         <div class="col-12">
                                             <button type="submit" class="btn btn-success">Submit</button>
-                                            <a href="{{route('user.list')}}" class="btn btn-secondary">Cancel</a>
+                                            <a href="{{route('customer.list')}}" class="btn btn-secondary">Cancel</a>
                                         </div>
                                     </div>
                                 </div>

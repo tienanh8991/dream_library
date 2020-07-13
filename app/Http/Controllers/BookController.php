@@ -65,4 +65,14 @@ class BookController extends Controller
         Toastr::success('Delete complete !', 'Success', ["positionClass" => "toast-top-right"]);
         return redirect()->route('book.list');
     }
+
+    public function search(Request $request) {
+        $books = Book::where('name' ,'LIKE', '%' . $request->keyword . '%')->get();
+        return response()->json($books);
+    }
+
+    public function render(Request $request) {
+        $book = Book::findOrFail($request->keyword);
+        return response()->json($book);
+    }
 }

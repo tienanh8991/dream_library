@@ -1,6 +1,6 @@
 @extends('master')
 @section('master.title')
-    Library | List User + Customer
+    Library | List Borrows Return
 @endsection
 
 @section('master.content')
@@ -17,13 +17,14 @@
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Customer / List</li>
+                            <li class="breadcrumb-item active">Borrow Return / List</li>
                         </ol>
                     </div>
                 </div>
             </div><!-- /.container-fluid -->
         </section>
 
+        <br>
         <!-- Main content -->
         <section class="content">
 
@@ -41,88 +42,52 @@
                     </div>
                 </div>
                 <div class="card-body p-0">
-                    <div class="" style="margin-left: 10px">
-                    <a class="btn btn-success " href="{{route('customer.create')}}">
-                        <i class="fas fa-pencil-alt">
-                        </i>
-                        Create
-                    </a>
-                    </div>
                     <table class="table table-striped projects">
                         <thead>
                         <tr>
-                            <th style="width: 1%">
+                            <th style="width: 10%">
                                 #
                             </th>
-                            <th style="width: 10%">
-                                Name
+                            <th style="width: 15%">
+                                Customer
                             </th>
-                            <th style="width: 20%">
-                                Code ID
+                            <th style="width: 15% ">
+                                Book
                             </th>
-                            <th style="width: 20%">
-                                Class
+                            <th style="width: 15%">
+                                Day Borrow
                             </th>
-                            <th style="width: 20%">
-                                Date Of Births
-                            </th>
-                            <th style="width: 8%" class="text-center">
-                                Status
-                            </th>
-                            <th style="width: 20%">
+                            <th style="width: 15%" >
+                                Day Borrow Expected
                             </th>
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($customers as $key => $customer)
+                        @foreach($borrows as $key => $borrow)
                             <tr>
                                 <td>
-                                    {{$customer->id}}
+                                    {{$borrow->id}}
                                 </td>
                                 <td>
                                     <a>
-                                        {{$customer->name}}
-                                    </a>
-                                    <br/>
-                                </td>
-                                <td>
-                                    <a>
-                                        {{$customer->code_id}}
+                                        {{$borrow->customer->name}}
                                     </a>
                                 </td>
                                 <td class="project_progress">
                                     <a>
-                                        {{$customer->class}}
+                                        {{$borrow->book->name}}
                                     </a>
                                 </td>
                                 <td>
                                     <a>
-                                        {{$customer->birthday}}
+                                        {{$borrow->borrow_date}}
                                     </a>
                                 </td>
-                                <td class="project-state">
-                                    @if($customer->status == \App\Http\Controllers\BorrowStatus::BORROWED)
-                                        <span class="badge badge-success">Borrowed</span>
-                                    @else
-                                        <span class="badge badge-danger">Not Borrowed</span>
-                                    @endif
-                                </td>
-
-                                <td class="project-actions text-right" >
-                                    <a class="btn btn-info btn-sm" href="{{route('customer.edit',$customer->id)}}">
-                                        <i class="fas fa-pencil-alt">
-                                        </i>
-                                        Edit
+                                <td>
+                                    <a>
+                                        {{$borrow->expected_date}}
                                     </a>
-                                    @if($customer->status !== \App\Http\Controllers\BorrowStatus::BORROWED)
-                                    <a class="btn btn-danger btn-sm" href="#" disabled="disable">
-                                        <i class="fas fa-trash">
-                                        </i>
-                                        Delete
-                                    </a>
-                                    @endif
                                 </td>
-
                             </tr>
                         @endforeach
                         </tbody>
