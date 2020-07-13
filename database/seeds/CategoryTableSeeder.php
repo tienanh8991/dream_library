@@ -13,8 +13,23 @@ class CategoryTableSeeder extends Seeder
     public function run()
     {
         $category = new Category();
-        $category->id = 0;
-        $category->title = '';
+        $category->title = 'Văn Học';
+        $category->save();
+
+        $category = new Category();
+        $category->title = 'Hồi Ký';
+        $category->save();
+
+        $category = new Category();
+        $category->title = 'Truyện';
+        $category->save();
+
+        $category = new Category();
+        $category->title = 'Tiểu thuyết';
+        $category->save();
+
+        $category = new Category();
+        $category->title = 'NA';
         $category->save();
     }
 }

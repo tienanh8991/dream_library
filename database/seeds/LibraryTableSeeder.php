@@ -13,10 +13,15 @@ class LibraryTableSeeder extends Seeder
     public function run()
     {
         $library = new Library();
-        $library->id = 0;
-        $library->name = 'Library Default';
-        $library->phone = '';
-        $library->address = '';
+        $library->name = 'Library A';
+        $library->phone = '0111632556';
+        $library->address = 'jkadjkahjdhjah';
+        $library->save();
+
+        $library = new Library();
+        $library->name = 'Library b';
+        $library->phone = '09963541452';
+        $library->address = 'kfjlksdeubsbvvvsd';
         $library->save();
 
     }
