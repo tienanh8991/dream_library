@@ -311,7 +311,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link">
+                                <a href="{{route('user.changePass',auth()->user()->id)}}" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Change Password</p>
                                 </a>
@@ -348,6 +348,7 @@
     <!-- /.control-sidebar -->
 </div>
 
+<script src="http://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
 {!! Toastr::message() !!}
 <!-- ./wrapper -->

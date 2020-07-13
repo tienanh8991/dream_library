@@ -19,7 +19,7 @@ class LibraryTableSeeder extends Seeder
         $library->save();
 
         $library = new Library();
-        $library->name = 'Library b';
+        $library->name = 'Library B';
         $library->phone = '09963541452';
         $library->address = 'kfjlksdeubsbvvvsd';
         $library->save();

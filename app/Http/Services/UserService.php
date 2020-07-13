@@ -37,7 +37,7 @@ class UserService
         $user->avatar = $request->avatar->store('images','public');
 
         if ($request->password === $request->confirmPassword){
-            Toastr::success('Add new complete !', 'Success', ["positionClass" => "toast-top-right"]);
+            Toastr::success('Add new complete !', 'Success', ["positionClass" => "toast-top-right", "progressBar" => true]);
             $this->userRepo->save($user);
         }else{
             $request->session()->flash('Error','Password does not match !');
@@ -57,6 +57,7 @@ class UserService
             $user->avatar = $user->avatar->store('','public');
         }
 
+        Toastr::success('Update complete !', 'Success', ["positionClass" => "toast-top-right", "progressBar" => true]);
         $this->userRepo->save($user);
 
     }

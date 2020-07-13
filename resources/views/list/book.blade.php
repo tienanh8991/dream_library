@@ -41,13 +41,6 @@
                     </div>
                 </div>
                 <div class="card-body p-0 row">
-                    <div style="margin-left: 10px">
-                        <a class="btn btn-success " href="{{route('book.create')}}">
-                            <i class="fas fa-pencil-alt">
-                            </i>
-                            Create
-                        </a>
-                    </div>
                     <table class="table table-striped projects">
                         <thead>
                         <tr>

@@ -42,7 +42,6 @@ class BookService
 
     public function update($request , $id) {
         $book = $this->bookRepo->find($id);
-        dd($book);
         $book->name = $request->name;
         $book->author = $request->author;
         $book->category_id = $request->category_id;

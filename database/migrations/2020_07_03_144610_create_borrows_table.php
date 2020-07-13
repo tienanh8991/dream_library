@@ -17,6 +17,7 @@ class CreateBorrowsTable extends Migration
             $table->id();
             $table->integer('customer_id');
             $table->integer('book_id');
+            $table->integer('status');
             $table->date('borrow_date');
             $table->date('expected_date');
             $table->timestamps();

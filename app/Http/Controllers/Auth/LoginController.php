@@ -25,13 +25,13 @@ class LoginController extends Controller
 
         if (Auth::attempt($user)){
             if (Auth::user()->role === Role::HIDE) {
-                Toastr::Warning('You are not authorized !', '!!!', ["positionClass" => "toast-top-right"]);
+                Toastr::Warning('You are not authorized !', '!!!', ["positionClass" => "toast-top-right", "progressBar" => true]);
                 return redirect()->route('index');
             }else{
                 return redirect()->route('dashboard');
             }
         }else{
-            Toastr::Error('Account password is incorrect !', '!!!', ["positionClass" => "toast-top-right"]);
+            Toastr::Error('Account password is incorrect !', '!!!', ["positionClass" => "toast-top-right", "progressBar" => true]);
             return back();
         }
     }

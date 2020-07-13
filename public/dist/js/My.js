@@ -16,7 +16,7 @@ $(document).ready(function () {
                         let html = '';
                         $.each(response, function (index, item) {
                             if (item.status === 2) {
-                                html += '<li class="list-group-item list-group-item-action customer-data" data-id="' + item.id + '">';
+                                html += '<li class="list-group-item list-group-item-action customer-data" data-id="' + item.id + '" data-content="'+item.name+'">';
                                 html += item.name + ' - ' + item.class;
                                 html += '</li>';
                             }
@@ -35,8 +35,10 @@ $(document).ready(function () {
 
     $('body').on('click', '.customer-data', function () {
         let idCustomer = $(this).attr('data-id');
+        let content = $(this).attr('data-content');
         let origin = window.location.origin;
-        $('#list-customer-search').html('')
+        $('#list-customer-search').html('');
+        $('#choose-customer').val(content);
         $.ajax({
             url: origin + '/customers/render',
             type: 'GET',
@@ -77,7 +79,7 @@ $(document).ready(function () {
                         let html = '';
                         $.each(response, function (index, item) {
                             if (item.borrowed === 2) {
-                                html += '<li class="list-group-item list-group-item-action book-data" data-id="' + item.id + '">';
+                                html += '<li class="list-group-item list-group-item-action book-data" data-id="' + item.id + '" data-content="'+item.name+'">';
                                 html += item.name;
                                 html += '</li>';
                             }
@@ -96,11 +98,12 @@ $(document).ready(function () {
 
     $('body').on('click', '.book-data', function () {
         let book_id = $(this).attr('data-id');
-        // console.log(book_id);
+        let content = $(this).attr('data-content');
+        console.log(content);
         let origin = window.location.origin;
 
         $('#list-book-search').html('');
-
+        $('#choose-book').val(content);
         $.ajax({
             url: origin + '/books/render',
             type: 'GET',

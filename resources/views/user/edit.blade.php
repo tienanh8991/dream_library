@@ -79,6 +79,7 @@
                                     <div class="form-group">
                                         <label for="inputStatus">Library</label>
                                         <select class="form-control custom-select" name="category_id">
+{{--                                            <option value="{{ $user->library->id }}" selected>{{$user->library->name}}</option>--}}
                                             @foreach($libraries as $key => $library)
                                                 <option value="{{ $library->id }}">{{$library->name}}</option>
                                             @endforeach

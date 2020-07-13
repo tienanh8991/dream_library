@@ -30,6 +30,8 @@ Route::middleware(['auth'])->group(function () {
             Route::post('{id}/update','UserController@update')->name('user.update');
             Route::get('profile','UserController@getProfile')->name('user.profile');
             Route::post('/profile','UserController@editProfile')->name('update.profile');
+            Route::get('{id}/change-password', 'UserController@changePass')->name('user.changePass');
+            Route::post('{id}/change-password', 'UserController@updatePass')->name('user.updatePass');
         });
         Route::prefix('categories')->group(function (){
             Route::get('/','CategoryController@getAll')->name('category.list');
@@ -55,7 +57,7 @@ Route::middleware(['auth'])->group(function () {
             Route::post('store','CustomerController@store')->name('customer.store');
             Route::get('{id}/edit','CustomerController@edit')->name('customer.edit');
             Route::post('{id}/update','CustomerController@update')->name('customer.update');
-            Route::post('{id}/destroy','CustomerController@destroy')->name('customer.delete');
+            Route::get('{id}/destroy','CustomerController@destroy')->name('customer.delete');
             Route::get('/search','CustomerController@search')->name('customer.search');
             Route::get('/render','CustomerController@render')->name('customer.render');
 

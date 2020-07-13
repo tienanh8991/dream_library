@@ -47,19 +47,6 @@
                             </div>
                             <!-- /.card-header -->
                             <div class="col-md-4">
-                                @if(auth()->user()->role !== \App\Http\Role::ADMIN)
-                                    <a class="btn btn-success " href="#" hidden>
-                                        <i class="fas fa-pencil-alt">
-                                        </i>
-                                        Create
-                                    </a>
-                                @else
-                                    <a class="btn btn-success " href="{{route('category.create')}}">
-                                        <i class="fas fa-pencil-alt">
-                                        </i>
-                                        Create
-                                    </a>
-                                @endif
                             </div>
                             <div class="card-body table-responsive p-0" style="height: 300px;">
                                 <table class="table table-head-fixed text-nowrap">

@@ -41,21 +41,7 @@
                     </div>
                 </div>
                 <div class="card-body p-0">
-                    <div class="" style="margin-left: 10px">
-                        @if(auth()->user()->role !== \App\Http\Role::ADMIN)
-                            <a class="btn btn-success " href="#" hidden>
-                                <i class="fas fa-pencil-alt">
-                                </i>
-                                Create
-                            </a>
-                        @else
-                            <a class="btn btn-success " href="{{route('user.create')}}">
-                                <i class="fas fa-pencil-alt">
-                                </i>
-                                Create
-                            </a>
-                        @endif
-                    </div>
+
                     <table class="table table-striped projects">
                         <thead>
                         <tr>
@@ -100,7 +86,9 @@
                                     <td>
                                         <ul class="list-inline">
                                             <li class="list-inline-item">
-                                                <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar.png">
+                                                @if(asset('storage/'.$user->avatar))
+                                                <img alt="Avatar" class="table-avatar" src="{{asset('storage/'.$user->avatar)}}">
+                                                @endif
                                             </li>
                                         </ul>
                                     </td>

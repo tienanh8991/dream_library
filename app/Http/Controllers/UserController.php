@@ -6,8 +6,11 @@ use App\Http\Requests\UserRequest;
 use App\Http\Role;
 use App\Http\Services\UserService;
 use App\Library;
+use App\User;
 use Brian2694\Toastr\Facades\Toastr;
+use foo\bar;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -45,8 +48,7 @@ class UserController extends Controller
     public function store(UserRequest $request)
     {
         $this->userService->create($request);
-        Toastr::success('Create complete !', 'Success', ["positionClass" => "toast-top-right"]);
-        return redirect()->route('user.create');
+        return redirect()->route('user.list');
     }
 
     public function editUser($id)
@@ -59,7 +61,6 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         $this->userService->update($request, $id);
-        Toastr::success('Update complete !', 'Success', ["positionClass" => "toast-top-right"]);
         return redirect()->route('user.list');
     }
 
@@ -69,7 +70,7 @@ class UserController extends Controller
             $user = $this->userService->find($id);
             $user->role = Role::HIDE;
             $user->save();
-            Toastr::success('Delete complete !', 'Success', ["positionClass" => "toast-top-right"]);
+            Toastr::success('Delete complete !', 'Success', ["positionClass" => "toast-top-right " , "progressBar" => true]);
 
             return redirect()->route('user.list');
         } else {
@@ -82,7 +83,7 @@ class UserController extends Controller
         $user = $this->userService->find($id);
         $user->role = Role::LIBRARIAN;
         $user->save();
-        Toastr::success('Restore user complete !', 'Success', ["positionClass" => "toast-top-right"]);
+        Toastr::success('Restore user complete !', 'Success', ["positionClass" => "toast-top-right", "progressBar" => true]);
 
         return redirect()->route('user.list');
     }
@@ -106,9 +107,25 @@ class UserController extends Controller
 
         $user->save();
 
-        Toastr::success('Update complete !', 'Success', ["positionClass" => "toast-top-right"]);
-
+        Toastr::success('Update complete !', 'Success', ["positionClass" => "toast-top-right", "progressBar" => true]);
         return response()->json($user);
 
+    }
+
+    public function changePass($id) {
+        return view('user.changePassword');
+    }
+
+    public function updatePass(Request $request ,$id) {
+        $user = User::findOrFail($id);
+        if ($request->password === $request->confirmPassword){
+            $user->password = Hash::make($request->password);
+            $user->save();
+            Toastr::success('Change Password complete !', 'Success', ["positionClass" => "toast-top-right " , "progressBar" => true]);
+            return redirect()->route('dashboard');
+        }else {
+            Toastr::error('Password does not match !', 'Success', ["positionClass" => "toast-top-right " , "progressBar" => true]);
+            return back();
+        }
     }
 }

@@ -86,7 +86,7 @@
                                     <label for="inputStatus">Library</label>
                                     <select class="form-control custom-select" name="category_id">
                                         @foreach($libraries as $key => $library)
-                                            <option value="{{ $library->id }}">{{$library->name}}</option>
+                                            <option value="{{ $library->id }}" selected>{{$library->name}}</option>
                                         @endforeach
                                     </select>
                                     <div style="color: red">

@@ -26,7 +26,7 @@
 
         <!-- Main content -->
 
-        <form action="{{route('customer.update',$customer->id)}}" method="post" >
+        <form action="{{route('customer.update',$customer->id)}}" method="post">
             @csrf
             <section class="content">
                 <div class="row">
@@ -44,24 +44,29 @@
                             <div class="card-body">
                                 <div class="form-group">
                                     <label for="inputName">Name</label>
-                                    <input type="text" id="inputName" class="form-control" name="name" value="{{$customer->name}}" disabled>
+                                    <input type="text" id="inputName" class="form-control" name="name"
+                                           value="{{$customer->name}}">
                                 </div>
                                 <div class="form-group">
                                     <label for="inputEmail">Code ID</label>
-                                    <input type="text" id="inputEmail" class="form-control" name="code_id" value="{{$customer->code_id}}">
+                                    <input type="text" id="inputEmail" class="form-control" name="code_id"
+                                           value="{{$customer->code_id}}">
                                 </div>
                                 <div class="form-group">
                                     <label for="inputPassword">Class</label>
-                                    <input type="text" id="inputPassword" class="form-control" name="class" value="{{$customer->class}}">
+                                    <input type="text" id="inputPassword" class="form-control" name="class"
+                                           value="{{$customer->class}}">
                                 </div>
 
                                 <div class="form-group">
                                     <label for="inputClientCompany">Address</label>
-                                    <input type="text" id="inputClientCompany" class="form-control" name="address" value="{{$customer->address}}">
+                                    <input type="text" id="inputClientCompany" class="form-control" name="address"
+                                           value="{{$customer->address}}">
                                 </div>
                                 <div class="form-group">
                                     <label for="inputProjectLeader">Day Of Birth</label>
-                                    <input type="date" id="inputProjectLeader" class="form-control" name="birthday" value="{{$customer->birthday    }}">
+                                    <input type="date" id="inputProjectLeader" class="form-control" name="birthday"
+                                           value="{{$customer->birthday    }}">
                                 </div>
                                 <div class="row">
                                     <div class="col-12">

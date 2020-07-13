@@ -67,7 +67,8 @@ class BookController extends Controller
     }
 
     public function search(Request $request) {
-        $books = Book::where('name' ,'LIKE', '%' . $request->keyword . '%')->get();
+        $library_id = Auth::user()->library_id;
+        $books = Book::where([['name' ,'LIKE', '%' . $request->keyword . '%'],['library_id',$library_id]])->get();
         return response()->json($books);
     }
 
