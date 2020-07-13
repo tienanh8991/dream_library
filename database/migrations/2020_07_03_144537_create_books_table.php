@@ -17,10 +17,14 @@ class CreateBooksTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('avatar');
+            $table->string('author');
             $table->unsignedBigInteger('category_id');
             $table->foreign('category_id')->references('id')->on('categories');
-            $table->string('description');
+            $table->unsignedBigInteger('library_id');
+            $table->foreign('library_id')->references('id')->on('libraries');
             $table->integer('status');
+            $table->integer('borrowed');
+            $table->string('description');
             $table->timestamps();
         });
     }
