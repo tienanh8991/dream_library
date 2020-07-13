@@ -33,7 +33,7 @@ class UserService
         $user->role = Role::LIBRARIAN;
         $user->phone = $request->phone;
         $user->address = $request->address;
-
+        $user->library_id = $request->library_id;
         $user->avatar = $request->avatar->store('images','public');
 
         if ($request->password === $request->confirmPassword){
@@ -51,7 +51,11 @@ class UserService
         $user->role = $request->role;
         $user->phone = $request->phone;
         $user->address = $request->address;
-        $user->avatar = $request->avatar->store('images','public');
+        if ($request->avatar !== null){
+            $user->avatar = $request->avatar->store('images','public');
+        }else{
+            $user->avatar = $user->avatar->store('','public');
+        }
 
         $this->userRepo->save($user);
 

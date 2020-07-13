@@ -2,45 +2,48 @@
 
 namespace App\Http\Controllers;
 
-use App\Book;
-use App\Borrow;
-use App\Customer;
-use App\Library;
+use App\Http\Services\BorrowService;
+use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 
 class BorrowController extends Controller
 {
-    public function getAll() {
-        $borrows = Borrow::all();
-        return view('list.borrow',compact('borrows'));
+    protected $borrowService;
+    public function __construct(BorrowService $borrowService)
+    {
+        $this->borrowService = $borrowService;
     }
 
-    public function create() {
-        $customers = Customer::all();
-        $books = Book::all();
-        $libraries = Library::all();
-        return view('borrow.add',compact('customers','books','libraries'));
+    public function getBorrow()
+    {
+        $borrows = $this->borrowService->getByStatus(1);
+        return view('list.borrow', compact('borrows'));
     }
 
-    public function store(Request $request) {
-        $borrow = new Borrow();
-        $borrow->customer_id = $request->customer;
-        $borrow->book_name = $request->book;
-        $borrow->coupon_name = $request->coupon_name;
-        $borrow->expected_date = $request->expected_date;
+    public function showReturnBorrows()
+    {
+        $borrows = $this->borrowService->getByStatus(2);
+        return view('list.borrowsReturn',compact('borrows'));
+    }
 
-        $borrow->save();
+    public function create()
+    {
+        return view('borrow.add');
+    }
+
+    public function store(Request $request)
+    {
+        $this->borrowService->create($request);
+
+        return response()->json($request->all());
+    }
+
+    public function returnBook($id)
+    {
+        $this->borrowService->returnBook($id);
+
+        Toastr::success('Return Book complete !', 'Success', ["positionClass" => "toast-top-right"]);
         return redirect()->route('borrow.list');
     }
 
-    public function edit($id) {
-        $borrow = Borrow::findOrFail($id);
-        dd($borrow);
-        return view('borrow.edit',compact('borrow'));
-    }
-
-    public function update(Request $request , $id) {
-        $borrow = Borrow::findOrFail($id);
-
-    }
 }

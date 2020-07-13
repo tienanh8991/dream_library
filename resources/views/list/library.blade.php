@@ -17,7 +17,7 @@
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">List</li>
+                            <li class="breadcrumb-item active">Library / List</li>
                         </ol>
                     </div>
                 </div>
@@ -41,13 +41,13 @@
                     </div>
                 </div>
                 <div class="card-body p-0">
-
+                    <div class="" style="margin-left: 10px">
                     <a class="btn btn-success " href="{{route('library.create')}}">
                         <i class="fas fa-pencil-alt">
                         </i>
                         Create
                     </a>
-
+                    </div>
                     <table class="table table-striped projects">
                         <thead>
                         <tr>

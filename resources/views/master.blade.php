@@ -6,6 +6,7 @@
     <title>@yield('master.title')</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{csrf_token()}}">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="{{asset('plugins/fontawesome-free/css/all.min.css')}}">
     <!-- Ionicons -->
@@ -28,9 +29,11 @@
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
     <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Overpass&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/my.css') }}">
     <style>
-        .wrapper {
+        .content {
             font-family: 'Overpass', sans-serif;
+            margin-left: 15px;
         }
     </style>
 </head>
@@ -83,13 +86,24 @@
             <!-- Sidebar user panel (optional) -->
             @if(\Illuminate\Support\Facades\Auth::user())
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-                    <div class="image">
-                        <img
-                            src="https://cdn1.vectorstock.com/i/1000x1000/40/30/user-glyph-icon-web-and-mobile-admin-sign-vector-18444030.jpg"
-                            class="img-circle elevation-2" alt="User Image">
-                    </div>
+                    @if(auth()->user()->avatar !== null)
+                        <div class="image">
+                            <img
+                                src="{{asset('storage/'. auth()->user()->avatar)}}"
+                                class="brand-image img-circle elevation-3"
+                                alt="User Image" width="100" height="100">
+                        </div>
+                    @else
+                        <div class="image">
+                            <img
+                                src="{{asset('img/admin_img.jpg')}}"
+                                class="brand-image img-circle elevation-3"
+                                alt="User Image" width="100" height="100">
+                        </div>
+                    @endif
                     <div class="info">
-                        <a href="#" class="d-block" style="color: green">{{auth()->user()->name}}</a>
+                        <a href="{{route('user.profile')}}" class="d-block"
+                           style="color: green">{{auth()->user()->name}}</a>
                     </div>
                 </div>
         @endif
@@ -100,118 +114,180 @@
                     <!-- Add icons to the links using the .nav-icon class
                          with font-awesome or any other icon font library -->
                     <li class="nav-item has-treeview menu-open">
-                        <a href="#" class="nav-link active">
+                        <a href="{{route('dashboard')}}" class="nav-link active">
                             <i class="nav-icon fas fa-tachometer-alt"></i>
                             <p>
                                 Dashboard
                             </p>
                         </a>
                     </li>
-                    <li class="nav-item has-treeview" >
+                    @if(\Illuminate\Support\Facades\Auth::user()->role == \App\Http\Role::ADMIN)
+                        <li class="nav-item has-treeview">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon 	fas fa-user-alt"></i>
+                                <p>
+                                    Users
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav-treeview {{ (request()->is('users')) ? 'active' : '' }}
+                                                    {{ (request()->is('users/create')) ? 'active' : '' }}">
+                                <li class="nav-item">
+                                    <a href="{{route('user.list')}}"
+                                       class="nav-link {{ (request()->is('users')) ? 'text-blue' : '' }} ">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>List</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{route('user.create')}}"
+                                       class="nav-link {{ (request()->is('users/create')) ? 'text-blue' : '' }} ">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Add</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    @endif
+                    <li class="nav-item has-treeview">
                         <a href="#" class="nav-link">
-                            <i class="nav-icon fas fa-copy"></i>
+                            <i class="nav-icon fas fa-user-friends"></i>
                             <p>
-                                Users
+                                Customers
                                 <i class="fas fa-angle-left right"></i>
                             </p>
                         </a>
-                        @if(\Illuminate\Support\Facades\Auth::user()->role == \App\Http\Role::ADMIN)
-                        <ul class="nav nav-treeview">
+                        <ul class="nav-treeview {{ (request()->is('customers')) ? 'active' : '' }}
+                                                {{ (request()->is('customers/create')) ? 'active' : '' }}">
                             <li class="nav-item">
-                                <a href="{{route('user.list')}}" class="nav-link">
+                                <a href="{{route('customer.list')}}"
+                                   class="nav-link {{ (request()->is('customers')) ? 'text-blue' : '' }}">
                                     <i class="far fa-circle nav-icon"></i>
-                                    <p>Users List</p>
+                                    <p> List</p>
                                 </a>
                             </li>
-                        </ul>
-                        @endif
-                        <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="{{route('customer.list')}}" class="nav-link">
+                                <a href="{{route('customer.create')}}"
+                                   class="nav-link {{ (request()->is('customers/create')) ? 'text-blue' : '' }}">
                                     <i class="far fa-circle nav-icon"></i>
-                                    <p>Customer List</p>
+                                    <p> Add</p>
                                 </a>
                             </li>
                         </ul>
                     </li>
                     @if(\Illuminate\Support\Facades\Auth::user()->role == \App\Http\Role::ADMIN)
-                    <li class="nav-item has-treeview">
-                        <a href="#" class="nav-link">
-                            <i class="nav-icon fas fa-chart-pie"></i>
-                            <p>
-                                Library
-                                <i class="right fas fa-angle-left"></i>
-                            </p>
-                        </a>
-                        <ul class="nav nav-treeview">
-                            <li class="nav-item">
-                                <a href="{{route('library.list')}}" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>List Library</p>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
+                        <li class="nav-item has-treeview">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-building"></i>
+                                <p>
+                                    Library
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav-treeview {{ (request()->is('libraries')) ? 'active' : '' }}
+                                                    {{ (request()->is('libraries/create')) ? 'active' : '' }}">
+                                <li class="nav-item">
+                                    <a href="{{route('library.list')}}"
+                                       class="nav-link {{ (request()->is('libraries')) ? 'text-blue' : '' }}">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>List </p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{route('library.create')}}"
+                                       class="nav-link {{ (request()->is('libraries/create')) ? 'text-blue' : '' }}">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Add </p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
                     @endif
                     <li class="nav-item has-treeview">
                         <a href="#" class="nav-link">
-                            <i class="nav-icon fas fa-tree"></i>
+                            <i class="nav-icon fas fa-book"></i>
                             <p>
                                 Books
                                 <i class="fas fa-angle-left right"></i>
                             </p>
                         </a>
-                        <ul class="nav nav-treeview">
+                        <ul class="nav-treeview {{ (request()->is('books')) ? 'active' : '' }}
+                                                {{ (request()->is('books/create')) ? 'active' : '' }}">
                             <li class="nav-item">
-                                <a href="{{route('book.list')}}" class="nav-link">
+                                <a href="{{route('book.list')}}"
+                                   class="nav-link {{ (request()->is('books')) ? 'text-blue' : '' }}">
                                     <i class="far fa-circle nav-icon"></i>
-                                    <p>Books List</p>
+                                    <p> List</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{route('book.create')}}"
+                                   class="nav-link {{ (request()->is('books/create')) ? 'text-blue' : '' }}">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p> Add</p>
                                 </a>
                             </li>
                         </ul>
                     </li>
                     @if(\Illuminate\Support\Facades\Auth::user()->role == \App\Http\Role::ADMIN)
-                    <li class="nav-item has-treeview">
-                        <a href="#" class="nav-link">
-                            <i class="nav-icon fas fa-edit"></i>
-                            <p>
-                                Category
-                                <i class="fas fa-angle-left right"></i>
-                            </p>
-                        </a>
-                        <ul class="nav nav-treeview">
-                            <li class="nav-item">
-                                <a href="{{route('category.list')}}" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>List Category</p>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
+                        <li class="nav-item has-treeview">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon 	fas fa-file-alt"></i>
+                                <p>
+                                    Category
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav-treeview {{ (request()->is('categories')) ? 'active' : '' }}
+                                                    {{ (request()->is('categories/create')) ? 'active' : '' }}">
+                                <li class="nav-item">
+                                    <a href="{{route('category.list')}}"
+                                       class="nav-link {{ (request()->is('categories')) ? 'text-blue' : '' }}">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>List </p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{route('category.create')}}"
+                                       class="nav-link {{ (request()->is('categories/create')) ? 'text-blue' : '' }}">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Add </p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
                     @endif
                     <li class="nav-item has-treeview">
                         <a href="#" class="nav-link">
-                            <i class="nav-icon fas fa-table"></i>
+                            <i class="nav-icon 	fas fa-clipboard"></i>
                             <p>
                                 Borrows
                                 <i class="fas fa-angle-left right"></i>
                             </p>
                         </a>
-                        <ul class="nav nav-treeview">
+                        <ul class="nav-treeview
+                                {{ (request()->is('borrows')) ? 'active' : '' }}
+                                {{ (request()->is('borrows/create')) ? 'active' : '' }}
+                                {{ (request()->is('borrows/return')) ? 'active' : '' }}">
                             <li class="nav-item">
-                                <a href="{{route('borrow.list')}}" class="nav-link">
+                                <a href="{{route('borrow.list')}}"
+                                   class="nav-link {{ (request()->is('borrows')) ? 'text-blue' : '' }}">
                                     <i class="far fa-circle nav-icon"></i>
-                                    <p>Borrows List</p>
+                                    <p> List</p>
                                 </a>
                             </li>
+                            @if(auth()->user()->role !== \App\Http\Role::ADMIN)
+                                <li class="nav-item" disabled="disable">
+                                    <a href="{{route('borrow.create')}}"
+                                       class="nav-link {{ (request()->is('borrows/create')) ? 'text-blue' : '' }}">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Add New Borrow</p>
+                                    </a>
+                                </li>
+                            @endif
                             <li class="nav-item">
-                                <a href="{{route('borrow.create')}}" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Add New Borrow</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#" class="nav-link">
+                                <a href="{{route('borrow.return.list')}}"
+                                   class="nav-link {{ (request()->is('borrows/return')) ? 'text-blue' : '' }}">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>List Borrow Return</p>
                                 </a>
@@ -219,23 +295,21 @@
                         </ul>
                     </li>
                     <li class="nav-header">EXAMPLES</li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">
-                            <i class="nav-icon far fa-calendar-alt"></i>
-                            <p>
-                                Calendar
-                            </p>
-                        </a>
-                    </li>
                     <li class="nav-item has-treeview">
                         <a href="#" class="nav-link">
-                            <i class="nav-icon far fa-plus-square"></i>
+                            <i class="nav-icon fas fa-exclamation-circle"></i>
                             <p>
-                                Extras
+                                Utilities
                                 <i class="fas fa-angle-left right"></i>
                             </p>
                         </a>
-                        <ul class="nav nav-treeview">
+                        <ul class="nav-treeview {{ (request()->is('users/profile')) ? 'active' : '' }}">
+                            <li class="nav-item">
+                                <a href="{{route('user.profile')}}" class="nav-link {{ (request()->is('users/profile')) ? 'text-blue' : '' }}">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Profile</p>
+                                </a>
+                            </li>
                             <li class="nav-item">
                                 <a href="#" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
@@ -248,7 +322,6 @@
                                     <p>Logout</p>
                                 </a>
                             </li>
-
                         </ul>
                     </li>
                 </ul>
@@ -257,14 +330,14 @@
         </div>
         <!-- /.sidebar -->
     </aside>
-
-    @yield('master.content')
-
+    <div class="content">
+        @yield('master.content')
+    </div>
     <footer class="main-footer">
-        <strong>Copyright &copy; 2014-2019 <a href="http://adminlte.io">AdminLTE.io</a>.</strong>
+        <strong>Copyright &copy; COVID-2019 <a href="http://adminlte.io">Tiến Đệ</a>.</strong>
         All rights reserved.
         <div class="float-right d-none d-sm-inline-block">
-            <b>Version</b> 3.0.5
+            <b>Version</b> x.0.x
         </div>
     </footer>
 
@@ -275,7 +348,6 @@
     <!-- /.control-sidebar -->
 </div>
 
-<script src="http://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
 {!! Toastr::message() !!}
 <!-- ./wrapper -->
@@ -287,7 +359,7 @@
 <script>
     $.widget.bridge('uibutton', $.ui.button)
 </script>
-<!-- Bootstrap 4 -->
+
 <script src="{{asset('plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 <!-- ChartJS -->
 <script src="{{asset('plugins/chart.js/Chart.min.js')}}"></script>
@@ -313,5 +385,80 @@
 <script src="{{asset('dist/js/pages/dashboard.js')}}"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="{{asset('dist/js/demo.js')}}"></script>
+<script src="{{asset('dist/js/My.js')}}"></script>
+
+<script>
+    $(function () {
+        //Initialize Select2 Elements
+        $('.select2').select2()
+
+        //Initialize Select2 Elements
+        $('.select2bs4').select2({
+            theme: 'bootstrap4'
+        })
+
+        //Datemask dd/mm/yyyy
+        $('#datemask').inputmask('dd/mm/yyyy', {'placeholder': 'dd/mm/yyyy'})
+        //Datemask2 mm/dd/yyyy
+        $('#datemask2').inputmask('mm/dd/yyyy', {'placeholder': 'mm/dd/yyyy'})
+        //Money Euro
+        $('[data-mask]').inputmask()
+
+        //Date range picker
+        $('#reservationdate').datetimepicker({
+            format: 'L'
+        });
+        //Date range picker
+        $('#reservation').daterangepicker()
+        //Date range picker with time picker
+        $('#reservationtime').daterangepicker({
+            timePicker: true,
+            timePickerIncrement: 30,
+            locale: {
+                format: 'MM/DD/YYYY hh:mm A'
+            }
+        })
+        //Date range as a button
+        $('#daterange-btn').daterangepicker(
+            {
+                ranges: {
+                    'Today': [moment(), moment()],
+                    'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                    'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+                    'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+                    'This Month': [moment().startOf('month'), moment().endOf('month')],
+                    'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+                },
+                startDate: moment().subtract(29, 'days'),
+                endDate: moment()
+            },
+            function (start, end) {
+                $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'))
+            }
+        )
+
+        //Timepicker
+        $('#timepicker').datetimepicker({
+            format: 'LT'
+        })
+
+        //Bootstrap Duallistbox
+        $('.duallistbox').bootstrapDualListbox()
+
+        //Colorpicker
+        $('.my-colorpicker1').colorpicker()
+        //color picker with addon
+        $('.my-colorpicker2').colorpicker()
+
+        $('.my-colorpicker2').on('colorpickerChange', function (event) {
+            $('.my-colorpicker2 .fa-square').css('color', event.color.toString());
+        });
+
+        $("input[data-bootstrap-switch]").each(function () {
+            $(this).bootstrapSwitch('state', $(this).prop('checked'));
+        });
+
+    })
+</script>
 </body>
 </html>

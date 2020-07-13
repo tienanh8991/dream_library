@@ -9,6 +9,7 @@ use App\Http\Services\BookService;
 use App\Http\Services\CategoryService;
 use App\Library;
 use Brian2694\Toastr\Facades\Toastr;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class BookController extends Controller
@@ -51,7 +52,7 @@ class BookController extends Controller
         return view('book.edit',compact('book','categories'));
     }
 
-    public function update(BookRequest $request , $id) {
+    public function update(Request $request , $id) {
         $this->bookService->update($request,$id);
         Toastr::success('Update complete !', 'Success', ["positionClass" => "toast-top-right"]);
         return redirect()->route('book.list');
@@ -63,5 +64,15 @@ class BookController extends Controller
 
         Toastr::success('Delete complete !', 'Success', ["positionClass" => "toast-top-right"]);
         return redirect()->route('book.list');
+    }
+
+    public function search(Request $request) {
+        $books = Book::where('name' ,'LIKE', '%' . $request->keyword . '%')->get();
+        return response()->json($books);
+    }
+
+    public function render(Request $request) {
+        $book = Book::findOrFail($request->keyword);
+        return response()->json($book);
     }
 }

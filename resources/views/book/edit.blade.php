@@ -17,7 +17,7 @@
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Edit Book</li>
+                            <li class="breadcrumb-item active">Book / Edit</li>
                         </ol>
                     </div>
                 </div>
@@ -25,7 +25,7 @@
         </section>
 
         <!-- Main content -->
-        <div class="container ">
+
             <form action="{{route('book.update',$book->id)}}" method="post" enctype="multipart/form-data">
                 @csrf
                 <section class="content">
@@ -46,11 +46,21 @@
                                         <label for="inputName">Name</label>
                                         <input type="text" id="inputName" class="form-control" name="name"
                                                value="{{$book->name}}">
+                                        <div style="color: red">
+                                            @if($errors->has('name'))
+                                                {{$errors->first('name')}}
+                                            @endif
+                                        </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="inputName">Author</label>
                                         <input type="text" id="inputName" class="form-control" name="author"
                                                value="{{$book->author}}">
+                                        <div style="color: red">
+                                            @if($errors->has('author'))
+                                                {{$errors->first('author')}}
+                                            @endif
+                                        </div>
                                     </div>
 
                                     <div class="form-group">
@@ -68,6 +78,11 @@
                                                 @endforeach
                                             @endif
                                         </select>
+                                        <div style="color: red">
+                                            @if($errors->has('category_id'))
+                                                {{$errors->first('category_id')}}
+                                            @endif
+                                        </div>
                                     </div>
 
                                     <div class="form-group">
@@ -96,7 +111,18 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="inputEmail">Avatar</label>
-                                        <input type="file" id="inputEmail" class="form-control" name="avatar">
+                                        <input type="file" id="inputEmail" class="form-control" name="avatar" value="{{$book->avatar}}">
+                                        <div style="color: red">
+                                            @if($errors->has('avatar'))
+                                                {{$errors->first('avatar')}}
+                                            @endif
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <button type="submit" class="btn btn-success">Submit</button>
+                                            <a href="{{route('book.list')}}" class="btn btn-secondary">Cancel</a>
+                                        </div>
                                     </div>
                                 </div>
                                 <!-- /.card-body -->
@@ -104,17 +130,12 @@
                             <!-- /.card -->
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-12">
-                            <button type="submit" class="btn btn-success">Submit</button>
-                            <a href="{{route('book.list')}}" class="btn btn-secondary">Cancel</a>
-                        </div>
-                    </div>
+
                 </section>
             </form>
         </div>
         <!-- /.content -->
-    </div>
+
     <!-- /.content-wrapper -->
 
 @endsection

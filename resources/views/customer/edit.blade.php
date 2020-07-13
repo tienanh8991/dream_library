@@ -1,6 +1,6 @@
 @extends('master')
 @section('master.title')
-    Library | Add new category
+    Library | Edit customer
 @endsection
 
 @section('master.content')
@@ -12,12 +12,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1> Add New Category</h1>
+                        <h1> Edit Customer</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Category / Create</li>
+                            <li class="breadcrumb-item active">Customer / Edit</li>
                         </ol>
                     </div>
                 </div>
@@ -26,7 +26,7 @@
 
         <!-- Main content -->
 
-        <form action="{{route('category.store')}}" method="post" enctype="multipart/form-data">
+        <form action="{{route('customer.update',$customer->id)}}" method="post" >
             @csrf
             <section class="content">
                 <div class="row">
@@ -43,27 +43,30 @@
                             </div>
                             <div class="card-body">
                                 <div class="form-group">
-                                    <label for="inputName">Title</label>
-                                    <input type="text" id="inputName" class="form-control" name="title">
-                                    <div style="color: red">
-                                        @if($errors->has('title'))
-                                            {{$errors->fisrt('title')}}
-                                        @endif
-                                    </div>
+                                    <label for="inputName">Name</label>
+                                    <input type="text" id="inputName" class="form-control" name="name" value="{{$customer->name}}" disabled>
                                 </div>
                                 <div class="form-group">
-                                    <label for="inputEmail">Image</label>
-                                    <input type="file" id="inputEmail" class="form-control" name="image">
-                                    <div style="color: red">
-                                        @if($errors->has('image'))
-                                            {{$errors->fisrt('image')}}
-                                        @endif
-                                    </div>
+                                    <label for="inputEmail">Code ID</label>
+                                    <input type="text" id="inputEmail" class="form-control" name="code_id" value="{{$customer->code_id}}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputPassword">Class</label>
+                                    <input type="text" id="inputPassword" class="form-control" name="class" value="{{$customer->class}}">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="inputClientCompany">Address</label>
+                                    <input type="text" id="inputClientCompany" class="form-control" name="address" value="{{$customer->address}}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputProjectLeader">Day Of Birth</label>
+                                    <input type="date" id="inputProjectLeader" class="form-control" name="birthday" value="{{$customer->birthday    }}">
                                 </div>
                                 <div class="row">
                                     <div class="col-12">
                                         <button type="submit" class="btn btn-success">Submit</button>
-                                        <a href="{{route('category.list')}}" class="btn btn-secondary">Cancel</a>
+                                        <a href="{{route('customer.list')}}" class="btn btn-secondary">Cancel</a>
                                     </div>
                                 </div>
                             </div>
@@ -81,4 +84,3 @@
     <!-- /.content-wrapper -->
 
 @endsection
-

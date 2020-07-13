@@ -17,7 +17,7 @@
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Edit Category</li>
+                            <li class="breadcrumb-item active">Category / Edit</li>
                         </ol>
                     </div>
                 </div>
@@ -25,7 +25,7 @@
         </section>
 
         <!-- Main content -->
-        <div class="container ">
+
             <form action="{{route('category.update',$category->id)}}" method="post" enctype="multipart/form-data">
                 @csrf
                 <section class="content">
@@ -48,7 +48,18 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="inputEmail">Image</label>
-                                        <input type="file" id="inputEmail" class="form-control" name="image">
+                                        <input type="file" id="inputEmail" class="form-control" name="image" value="{{$category->image}}">
+                                    </div>
+                                    <div style="color: red">
+                                        @if($errors->has('image'))
+                                            {{$errors->first('image')}}
+                                        @endif
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <button type="submit" class="btn btn-success">Submit</button>
+                                            <a href="{{route('category.list')}}" class="btn btn-secondary">Cancel</a>
+                                        </div>
                                     </div>
                                 </div>
                                 <!-- /.card-body -->
@@ -56,17 +67,12 @@
                             <!-- /.card -->
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-12">
-                            <button type="submit" class="btn btn-success">Submit</button>
-                            <a href="{{route('category.list')}}" class="btn btn-secondary">Cancel</a>
-                        </div>
-                    </div>
+
                 </section>
             </form>
         </div>
         <!-- /.content -->
-    </div>
+
     <!-- /.content-wrapper -->
 
 @endsection

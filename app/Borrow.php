@@ -9,7 +9,7 @@ class Borrow extends Model
     public function customer() {
         return $this->belongsTo('App\Customer','customer_id');
     }
-    public function books() {
-        return $this->belongsToMany('App\Book','books_borrow','borrow_id','book_id');
+    public function book() {
+        return $this->belongsTo('App\Book');
     }
 }

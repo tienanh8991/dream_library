@@ -2,63 +2,54 @@
 
 namespace App\Http\Controllers;
 
-use App\Book;
-use App\Library;
-use Illuminate\Http\Request;
+use App\Http\Requests\LibraryRequest;
+use App\Http\Services\LibraryService;
+use Brian2694\Toastr\Facades\Toastr;
 
 class LibraryController extends Controller
 {
-    public function getAll() {
-        $libraries = Library::all();
-        return view('list.library',compact('libraries'));
+    protected $libraryService;
+
+    public function __construct(LibraryService $libraryService)
+    {
+        $this->libraryService = $libraryService;
     }
 
-    public function create() {
+    public function getAll()
+    {
+        $libraries = $this->libraryService->getAll();
+        return view('list.library', compact('libraries'));
+    }
+
+    public function create()
+    {
         return view('library.add');
     }
 
-    public function store(Request $request) {
-        $library = new Library();
-        $library->name = $request->name;
-        $library->phone = $request->phone;
-        $library->address = $request->address;
-        $library->avatar = $request->avatar->store('images','public');
-
-        $library->save();
+    public function store(LibraryRequest $request)
+    {
+        $this->libraryService->create($request);
+        Toastr::success('Create complete !', 'Success', ["positionClass" => "toast-top-right"]);
         return redirect()->route('library.list');
     }
 
-    public function edit($id) {
-        $library = Library::findOrFail($id);
-        return view('library.edit',compact('library'));
+    public function edit($id)
+    {
+        $library = $this->libraryService->find($id);
+        return view('library.edit', compact('library'));
     }
 
-    public function update(Request $request , $id) {
-        $library = Library::findOrFail($id);
-        $library->name = $request->name;
-        $library->phone = $request->phone;
-        $library->address = $request->address;
-        $library->avatar = $request->avatar->store('images','public');
-
-        $library->save();
-
+    public function update(LibraryRequest $request, $id)
+    {
+        $this->libraryService->update($request,$id);
+        Toastr::success('Update complete !', 'Success', ["positionClass" => "toast-top-right"]);
         return redirect()->route('library.list');
     }
 
-    public function destroy($id) {
-        $library = Library::findOrFail($id);
-        $books = $library->books;
-        foreach ($books as $book) {
-            $book->library_id = null;
-            $book->save();
-        }
-        $users = $library->users;
-        foreach ($users as $user) {
-            $user->library_id = null;
-            $user->save();
-        }
-
-        $library->delete();
+    public function destroy($id)
+    {
+        $this->libraryService->delete($id);
+        Toastr::success('Delete complete !', 'Success', ["positionClass" => "toast-top-right"]);
         return redirect()->route('library.list');
     }
 }
