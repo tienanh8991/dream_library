@@ -20,7 +20,7 @@ class CreateCustomersTable extends Migration
             $table->integer('status');
             $table->string('class');
             $table->string('address');
-            $table->date('birthday');
+            $table->date('birthday')->nullable();
             $table->timestamps();
         });
     }

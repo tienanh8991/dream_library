@@ -18,11 +18,11 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
-            $table->string('avatar');
+            $table->string('avatar')->nullable();
             $table->string('phone');
             $table->string('address');
             $table->integer('role');
-            $table->unsignedBigInteger('library_id');
+            $table->unsignedBigInteger('library_id')->nullable();
             $table->foreign('library_id')->references('id')->on('libraries');
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
