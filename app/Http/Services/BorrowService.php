@@ -50,10 +50,11 @@ class BorrowService
 
     public function returnBook($id) {
         $borrow = $this->find($id);
+
         $customer_id = $borrow->customer_id;
         $book_id = $borrow->book_id;
 
-        $borrow->status = 2;
+        $borrow->status = 1;
         $borrow->save();
 
         $customer = $this->customerService->find($customer_id);

@@ -16,13 +16,13 @@ class BorrowController extends Controller
 
     public function getBorrow()
     {
-        $borrows = $this->borrowService->getByStatus(1);
+        $borrows = $this->borrowService->getByStatus(2);
         return view('list.borrow', compact('borrows'));
     }
 
     public function showReturnBorrows()
     {
-        $borrows = $this->borrowService->getByStatus(2);
+        $borrows = $this->borrowService->getByStatus(1);
         return view('list.borrowsReturn',compact('borrows'));
     }
 
